@@ -1,0 +1,4342 @@
+{
+  "build_info": {
+    "built_at": "2026-07-01T19:51:42",
+    "model": "all-MiniLM-L6-v2",
+    "index_type": "FlatIP",
+    "dimension": 384,
+    "n_components": 42
+  },
+  "store": [
+    {
+      "component_name": "ForgotPassword",
+      "category": "auth",
+      "description": "Password reset request form that accepts a user email.",
+      "import_path": "@/components/auth/ForgotPassword.astro",
+      "file_path": "components/auth/ForgotPassword.astro",
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "\"/auth/forgot-password\"",
+          "description": "Form action URL"
+        },
+        {
+          "name": "success",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Success state (email sent)"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Server error"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "accepts",
+        "account recovery",
+        "action",
+        "auth",
+        "authentication",
+        "email",
+        "error",
+        "forgot",
+        "forgot password",
+        "forgot password form",
+        "forgotpassword",
+        "form",
+        "password",
+        "password recovery",
+        "password reset",
+        "request",
+        "reset",
+        "reset link",
+        "reset password form",
+        "success",
+        "user"
+      ],
+      "accessibility_notes": "aria-live region for success/error states",
+      "usage_example": "---\nimport ForgotPassword from '@/components/auth/ForgotPassword.astro';\n---\n\n<ForgotPassword\n  action=\"/auth/forgot-password\"\n  success={false}\n  error=\"example\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "forgot password form",
+        "password reset page",
+        "account recovery form",
+        "send a password reset email",
+        "how do I add forgot password to my site",
+        "password recovery flow",
+        "request a reset link form"
+      ],
+      "position": 0
+    },
+    {
+      "component_name": "LoginForm",
+      "category": "auth",
+      "description": "Complete email/password login form with validation states and OAuth options.",
+      "import_path": "@/components/auth/LoginForm.astro",
+      "file_path": "components/auth/LoginForm.astro",
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "\"/auth/login\"",
+          "description": "Form action URL"
+        },
+        {
+          "name": "method",
+          "type": "\"post\" | \"get\"",
+          "required": false,
+          "default": "\"post\"",
+          "description": "HTTP method"
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "\"Sign in to your account\"",
+          "description": "Heading shown above the form"
+        },
+        {
+          "name": "showRemember",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show \"Remember me\" checkbox"
+        },
+        {
+          "name": "showForgot",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show forgot password link"
+        },
+        {
+          "name": "redirectUrl",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Redirect URL after login"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Error message from server"
+        }
+      ],
+      "slots": [
+        {
+          "name": "oauth",
+          "description": "OAuth provider buttons (Google, GitHub, etc.)"
+        },
+        {
+          "name": "footer",
+          "description": "Links below the form (sign up, forgot password)"
+        }
+      ],
+      "tags": [
+        "action",
+        "auth",
+        "authentication",
+        "authentication form",
+        "complete",
+        "email",
+        "email login",
+        "error",
+        "footer",
+        "forgot",
+        "form",
+        "heading",
+        "login",
+        "login form",
+        "login page",
+        "login screen",
+        "loginform",
+        "method",
+        "oauth",
+        "options",
+        "password",
+        "password login",
+        "redirect",
+        "remember",
+        "show",
+        "sign in",
+        "sign in form",
+        "states",
+        "url",
+        "user",
+        "user login",
+        "validation"
+      ],
+      "accessibility_notes": "All inputs labelled, error messages linked via aria-describedby",
+      "usage_example": "---\nimport LoginForm from '@/components/auth/LoginForm.astro';\n---\n\n<LoginForm\n\n  action=\"/auth/login\"\n  method=\"post\"\n  heading=\"Sign in to your account\"\n>\n\n  <Fragment slot=\"oauth\">\n    <!-- OAuth provider buttons (Google, GitHub, etc.) -->\n  </Fragment>\n  <Fragment slot=\"footer\">\n    <!-- Links below the form (sign up, forgot password) -->\n  </Fragment>\n</LoginForm>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "login form with email and password fields",
+        "sign in page for my application",
+        "user authentication form",
+        "build a login page",
+        "email and password sign in",
+        "how do I add a login to my site",
+        "login screen with remember me checkbox",
+        "user login component",
+        "authenticate users with a form",
+        "sign in with email form"
+      ],
+      "position": 1
+    },
+    {
+      "component_name": "RegisterForm",
+      "category": "auth",
+      "description": "New user registration form with name, email, password, and confirmation.",
+      "import_path": "@/components/auth/RegisterForm.astro",
+      "file_path": "components/auth/RegisterForm.astro",
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "\"/auth/register\"",
+          "description": "Form action URL"
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "\"Create your account\"",
+          "description": "Page heading"
+        },
+        {
+          "name": "showName",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show first + last name fields"
+        },
+        {
+          "name": "showConfirm",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Require password confirmation field"
+        },
+        {
+          "name": "showTerms",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show terms and conditions checkbox"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Server-side error"
+        }
+      ],
+      "slots": [
+        {
+          "name": "oauth",
+          "description": "OAuth sign-up buttons"
+        },
+        {
+          "name": "footer",
+          "description": "Login link / terms text"
+        }
+      ],
+      "tags": [
+        "account creation",
+        "action",
+        "auth",
+        "authentication",
+        "confirm",
+        "confirmation",
+        "create account",
+        "email",
+        "error",
+        "footer",
+        "form",
+        "heading",
+        "name",
+        "new",
+        "new user form",
+        "oauth",
+        "password",
+        "register",
+        "register form",
+        "registerform",
+        "registration",
+        "registration form",
+        "show",
+        "sign up form",
+        "signup form",
+        "terms",
+        "user",
+        "user registration"
+      ],
+      "accessibility_notes": "All inputs labelled, password strength hint linked via aria-describedby",
+      "usage_example": "---\nimport RegisterForm from '@/components/auth/RegisterForm.astro';\n---\n\n<RegisterForm\n\n  action=\"/auth/register\"\n  heading=\"Create your account\"\n  showName={true}\n>\n\n  <Fragment slot=\"oauth\">\n    <!-- OAuth sign-up buttons -->\n  </Fragment>\n  <Fragment slot=\"footer\">\n    <!-- Login link / terms text -->\n  </Fragment>\n</RegisterForm>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "user registration form",
+        "sign up form with email and password",
+        "create account form",
+        "new user registration page",
+        "how do I let users create an account",
+        "signup page component",
+        "user onboarding registration form",
+        "account creation with confirmation",
+        "register a new user"
+      ],
+      "position": 2
+    },
+    {
+      "component_name": "Article",
+      "category": "content",
+      "description": "Long-form content layout with header, author meta, body prose, and table of contents support.",
+      "import_path": "@/components/content/Article.astro",
+      "file_path": "components/content/Article.astro",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Article title"
+        },
+        {
+          "name": "subtitle",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Subtitle or deck"
+        },
+        {
+          "name": "authorName",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Author name"
+        },
+        {
+          "name": "authorRole",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Author role"
+        },
+        {
+          "name": "authorImage",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Author avatar URL"
+        },
+        {
+          "name": "publishedAt",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Published date ISO string"
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Updated date ISO string"
+        },
+        {
+          "name": "readTime",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Estimated reading time"
+        },
+        {
+          "name": "category",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Category"
+        },
+        {
+          "name": "hasSidebar",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Enable sidebar column layout"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "cover",
+          "description": "Hero/cover image"
+        },
+        {
+          "name": "default",
+          "description": "Main article body content (markdown prose)"
+        },
+        {
+          "name": "sidebar",
+          "description": "Optional right-side TOC or related links"
+        },
+        {
+          "name": "tags",
+          "description": "Tag badge list"
+        },
+        {
+          "name": "author",
+          "description": "Author bio block"
+        }
+      ],
+      "tags": [
+        "article",
+        "article layout",
+        "author",
+        "blog post",
+        "body",
+        "category",
+        "content",
+        "content page",
+        "contents",
+        "cover",
+        "documentation page",
+        "form",
+        "has",
+        "header",
+        "image",
+        "layout",
+        "long",
+        "long form content",
+        "media",
+        "meta",
+        "name",
+        "post page",
+        "prose",
+        "published",
+        "read",
+        "reading layout",
+        "role",
+        "sidebar",
+        "subtitle",
+        "support",
+        "table",
+        "tags",
+        "text",
+        "time",
+        "title",
+        "updated"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport Article from '@/components/content/Article.astro';\n---\n\n<Article\n\n  title=\"Title\"\n  subtitle=\"example\"\n  authorName=\"example\"\n>\n\n  <Fragment slot=\"cover\">\n    <!-- Hero/cover image -->\n  </Fragment>\n  <Fragment slot=\"sidebar\">\n    <!-- Optional right-side TOC or related links -->\n  </Fragment>\n  Article content\n</Article>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "display a long-form article",
+        "blog post reading layout",
+        "styled article content with typography",
+        "reading layout for documentation",
+        "prose content page",
+        "article page with heading and body",
+        "long-form content display",
+        "content page layout for a post"
+      ],
+      "position": 3
+    },
+    {
+      "component_name": "BlogCard",
+      "category": "content",
+      "description": "Blog post preview card with cover image, category, title, excerpt, and author.",
+      "import_path": "@/components/content/BlogCard.astro",
+      "file_path": "components/content/BlogCard.astro",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Post title"
+        },
+        {
+          "name": "excerpt",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Short excerpt"
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": false,
+          "default": "\"#\"",
+          "description": "Permalink"
+        },
+        {
+          "name": "coverSrc",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Cover image URL"
+        },
+        {
+          "name": "coverAlt",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Cover image alt text"
+        },
+        {
+          "name": "category",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Category label"
+        },
+        {
+          "name": "authorName",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Author name"
+        },
+        {
+          "name": "authorImage",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Author avatar URL"
+        },
+        {
+          "name": "publishedAt",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Published date string"
+        },
+        {
+          "name": "readTime",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Estimated reading time"
+        },
+        {
+          "name": "layout",
+          "type": "\"vertical\" | \"horizontal\"",
+          "required": false,
+          "default": "\"vertical\"",
+          "description": "Card orientation"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "image",
+          "description": "Cover image (overrides coverSrc prop)"
+        }
+      ],
+      "tags": [
+        "alt",
+        "article card",
+        "article preview",
+        "author",
+        "blog",
+        "blog card",
+        "blog listing",
+        "blog preview",
+        "blogcard",
+        "card",
+        "category",
+        "content",
+        "content card",
+        "cover",
+        "excerpt",
+        "href",
+        "image",
+        "layout",
+        "media",
+        "name",
+        "news card",
+        "post",
+        "post card",
+        "post preview",
+        "preview",
+        "published",
+        "read",
+        "src",
+        "text",
+        "time",
+        "title"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport BlogCard from '@/components/content/BlogCard.astro';\n---\n\n<BlogCard\n\n  title=\"Title\"\n  excerpt=\"example\"\n  href=\"#\"\n>\n\n  <Fragment slot=\"image\">\n    <!-- Cover image (overrides coverSrc prop) -->\n  </Fragment>\n</BlogCard>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "blog post preview card",
+        "article card with title and excerpt",
+        "news card for a listing page",
+        "post preview with thumbnail image",
+        "blog listing card",
+        "article preview component",
+        "how do I show blog posts in a grid",
+        "content preview card for a blog"
+      ],
+      "position": 4
+    },
+    {
+      "component_name": "ProfileCard",
+      "category": "content",
+      "description": "User profile display card with avatar, bio, stats, and social links.",
+      "import_path": "@/components/content/ProfileCard.astro",
+      "file_path": "components/content/ProfileCard.astro",
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "User full name"
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Job title or role"
+        },
+        {
+          "name": "company",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Company or organisation"
+        },
+        {
+          "name": "bio",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Short bio"
+        },
+        {
+          "name": "avatarSrc",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Avatar image URL"
+        },
+        {
+          "name": "coverSrc",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Cover / banner image URL"
+        },
+        {
+          "name": "verified",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Verified badge"
+        },
+        {
+          "name": "layout",
+          "type": "\"vertical\" | \"horizontal\"",
+          "required": false,
+          "default": "\"vertical\"",
+          "description": "Layout: vertical (portrait) or horizontal"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "stats",
+          "description": "Follower/following/post count items"
+        },
+        {
+          "name": "actions",
+          "description": "Follow, message, or edit buttons"
+        },
+        {
+          "name": "links",
+          "description": "Social media link icons"
+        }
+      ],
+      "tags": [
+        "actions",
+        "author card",
+        "avatar",
+        "bio",
+        "bio card",
+        "card",
+        "company",
+        "content",
+        "cover",
+        "display",
+        "layout",
+        "links",
+        "media",
+        "member card",
+        "name",
+        "profile",
+        "profile card",
+        "profile page",
+        "profilecard",
+        "role",
+        "social",
+        "src",
+        "stats",
+        "team member card",
+        "text",
+        "user",
+        "user card",
+        "user profile",
+        "verified"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport ProfileCard from '@/components/content/ProfileCard.astro';\n---\n\n<ProfileCard\n\n  name=\"field-name\"\n  role=\"example\"\n  company=\"example\"\n>\n\n  <Fragment slot=\"stats\">\n    <!-- Follower/following/post count items -->\n  </Fragment>\n  <Fragment slot=\"actions\">\n    <!-- Follow, message, or edit buttons -->\n  </Fragment>\n</ProfileCard>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "display a user profile card",
+        "author card with bio and photo",
+        "team member profile component",
+        "user bio card with social links",
+        "profile page summary card",
+        "member card with name and title",
+        "show user information in a card",
+        "writer or contributor profile component",
+        "personal info card"
+      ],
+      "position": 5
+    },
+    {
+      "component_name": "ActivityFeed",
+      "category": "dashboard",
+      "description": "Scrollable list of recent user or system activity events.",
+      "import_path": "@/components/dashboard/ActivityFeed.astro",
+      "file_path": "components/dashboard/ActivityFeed.astro",
+      "props": [
+        {
+          "name": "items",
+          "type": "ActivityItem[]",
+          "required": false,
+          "default": "[]",
+          "description": "Activity items"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "\"Recent Activity\"",
+          "description": "Section title"
+        },
+        {
+          "name": "maxHeight",
+          "type": "string",
+          "required": false,
+          "default": "\"400px\"",
+          "description": "Max height with scroll"
+        },
+        {
+          "name": "emptyMessage",
+          "type": "string",
+          "required": false,
+          "default": "\"No recent activity.\"",
+          "description": "Show empty state message"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "ActivityItem children (or supply items prop)"
+        }
+      ],
+      "tags": [
+        "activity",
+        "activity feed",
+        "activity log",
+        "activityfeed",
+        "admin",
+        "analytics",
+        "dashboard",
+        "empty",
+        "event feed",
+        "events",
+        "feed",
+        "height",
+        "items",
+        "list",
+        "live feed",
+        "max",
+        "message",
+        "notification feed",
+        "recent",
+        "recent activity",
+        "scrollable",
+        "system",
+        "title",
+        "updates feed",
+        "user"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport ActivityFeed from '@/components/dashboard/ActivityFeed.astro';\n---\n\n<ActivityFeed\n\n  items=\"[]\"\n  title=\"Recent Activity\"\n  maxHeight=\"400px\"\n>\n\n  ActivityFeed content\n</ActivityFeed>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "recent activity feed in an admin panel",
+        "list of the latest events",
+        "live activity log for users",
+        "notification feed on a dashboard",
+        "what happened recently in the system",
+        "updates feed in an admin area",
+        "event log stream component",
+        "activity stream for a user account"
+      ],
+      "position": 6
+    },
+    {
+      "component_name": "DashboardCard",
+      "category": "dashboard",
+      "description": "Versatile metric/widget card for admin and analytics dashboards.",
+      "import_path": "@/components/dashboard/DashboardCard.astro",
+      "file_path": "components/dashboard/DashboardCard.astro",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Card title"
+        },
+        {
+          "name": "subtitle",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Optional subtitle"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Show a loading state"
+        },
+        {
+          "name": "noPadding",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Remove default body padding"
+        },
+        {
+          "name": "showHeaderActions",
+          "type": "boolean",
+          "required": false,
+          "default": "",
+          "description": "Header actions (e.g., export, filter buttons)"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "header",
+          "description": "Custom card header (title + actions row)"
+        },
+        {
+          "name": "default",
+          "description": "Card body content (charts, tables, stats)"
+        },
+        {
+          "name": "footer",
+          "description": "Card footer (links, last updated)"
+        }
+      ],
+      "tags": [
+        "actions",
+        "admin",
+        "admin card",
+        "admin widget",
+        "analytics",
+        "card",
+        "dashboard",
+        "dashboard card",
+        "dashboard component",
+        "dashboard panel",
+        "dashboard widget",
+        "dashboardcard",
+        "dashboards",
+        "footer",
+        "header",
+        "loading",
+        "metric",
+        "metric widget",
+        "padding",
+        "show",
+        "subtitle",
+        "title",
+        "versatile",
+        "widget"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport DashboardCard from '@/components/dashboard/DashboardCard.astro';\n---\n\n<DashboardCard\n\n  title=\"Title\"\n  subtitle=\"example\"\n  loading={false}\n>\n\n  <Fragment slot=\"header\">\n    <!-- Custom card header (title + actions row) -->\n  </Fragment>\n  <Fragment slot=\"footer\">\n    <!-- Card footer (links, last updated) -->\n  </Fragment>\n  DashboardCard content\n</DashboardCard>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "card for an admin dashboard",
+        "dashboard widget with header and content",
+        "admin panel card component",
+        "reusable card for dashboard layout",
+        "widget for displaying dashboard information",
+        "how do I build a dashboard card",
+        "admin widget with title and body slot",
+        "dashboard panel component"
+      ],
+      "position": 7
+    },
+    {
+      "component_name": "StatsGrid",
+      "category": "dashboard",
+      "description": "Responsive grid of key metric StatCards for dashboards.",
+      "import_path": "@/components/dashboard/StatsGrid.astro",
+      "file_path": "components/dashboard/StatsGrid.astro",
+      "props": [
+        {
+          "name": "stats",
+          "type": "StatItem[]",
+          "required": false,
+          "default": "[]",
+          "description": "Stats to render (or pass children via slot)"
+        },
+        {
+          "name": "cols",
+          "type": "2 | 3 | 4 | 5",
+          "required": false,
+          "default": "4",
+          "description": "Number of columns"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "StatCard components or custom metric cells"
+        }
+      ],
+      "tags": [
+        "admin",
+        "analytics",
+        "analytics grid",
+        "cols",
+        "dashboard",
+        "dashboard stats",
+        "dashboards",
+        "grid",
+        "key",
+        "kpi grid",
+        "metric",
+        "metrics grid",
+        "overview stats",
+        "responsive",
+        "statcards",
+        "statistics grid",
+        "stats",
+        "stats grid",
+        "statsgrid",
+        "summary stats"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport StatsGrid from '@/components/dashboard/StatsGrid.astro';\n---\n\n<StatsGrid\n\n  stats=\"[]\"\n  cols={4}\n>\n\n  StatsGrid content\n</StatsGrid>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "grid of KPI stats for a dashboard",
+        "metrics overview section showing multiple numbers",
+        "dashboard stats arranged in a grid",
+        "show several KPIs side by side",
+        "analytics overview grid for an admin panel",
+        "statistics summary grid",
+        "metrics grid component",
+        "KPI grid for a dashboard overview page"
+      ],
+      "position": 8
+    },
+    {
+      "component_name": "Card",
+      "category": "data",
+      "description": "Versatile content container with optional header, footer, and image.",
+      "import_path": "@/components/data/Card.astro",
+      "file_path": "components/data/Card.astro",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Card title (shown in default header if no header slot)"
+        },
+        {
+          "name": "subtitle",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Subtitle or description"
+        },
+        {
+          "name": "noPadding",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Remove padding from card body"
+        },
+        {
+          "name": "shadow",
+          "type": "\"none\" | \"sm\" | \"md\" | \"lg\"",
+          "required": false,
+          "default": "\"sm\"",
+          "description": "Shadow depth"
+        },
+        {
+          "name": "hoverable",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Clickable card with hover effect"
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Make entire card a link"
+        },
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show a border"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "image",
+          "description": "Top image area"
+        },
+        {
+          "name": "header",
+          "description": "Card header with title and actions"
+        },
+        {
+          "name": "default",
+          "description": "Main card body content"
+        },
+        {
+          "name": "footer",
+          "description": "Card footer with actions or metadata"
+        }
+      ],
+      "tags": [
+        "article card",
+        "bordered",
+        "box",
+        "card",
+        "container",
+        "content",
+        "content card",
+        "data display",
+        "feature card",
+        "footer",
+        "header",
+        "hoverable",
+        "href",
+        "image",
+        "info card",
+        "media card",
+        "optional",
+        "padding",
+        "panel",
+        "product card",
+        "shadow",
+        "subtitle",
+        "tile",
+        "title",
+        "versatile",
+        "widget card"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport Card from '@/components/data/Card.astro';\n---\n\n<Card\n\n  title=\"Title\"\n  subtitle=\"example\"\n  noPadding={false}\n>\n\n  <Fragment slot=\"image\">\n    <!-- Top image area -->\n  </Fragment>\n  <Fragment slot=\"header\">\n    <!-- Card header with title and actions -->\n  </Fragment>\n  Card content\n</Card>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "display content in a card layout",
+        "info card with title and description",
+        "product card with image and button",
+        "feature card on a landing page",
+        "content box with shadow and border",
+        "tile for displaying items in a list",
+        "article preview card",
+        "panel with header body and footer slots",
+        "media card with image and text"
+      ],
+      "position": 9
+    },
+    {
+      "component_name": "StatCard",
+      "category": "data",
+      "description": "Key metric display card with trend indicator for dashboards.",
+      "import_path": "@/components/data/StatCard.astro",
+      "file_path": "components/data/StatCard.astro",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Metric label"
+        },
+        {
+          "name": "value",
+          "type": "string | number",
+          "required": true,
+          "default": "",
+          "description": "Primary value (number or string)"
+        },
+        {
+          "name": "previousValue",
+          "type": "number",
+          "required": false,
+          "default": "",
+          "description": "Previous period value for change calculation"
+        },
+        {
+          "name": "change",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Manually set change label (overrides auto-calc)"
+        },
+        {
+          "name": "trend",
+          "type": "\"up\" | \"down\" | \"neutral\"",
+          "required": false,
+          "default": "\"neutral\"",
+          "description": "Direction of change"
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Icon name or SVG path snippet"
+        },
+        {
+          "name": "iconVariant",
+          "type": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"info\"",
+          "required": false,
+          "default": "\"primary\"",
+          "description": "Icon background color variant"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "analytics card",
+        "card",
+        "change",
+        "content",
+        "dashboard metric",
+        "dashboards",
+        "data display",
+        "display",
+        "icon",
+        "indicator",
+        "key",
+        "kpi card",
+        "label",
+        "metric",
+        "metric card",
+        "metric display",
+        "number card",
+        "number widget",
+        "previous",
+        "stat",
+        "stat card",
+        "stat widget",
+        "statcard",
+        "statistics card",
+        "trend",
+        "value",
+        "variant"
+      ],
+      "accessibility_notes": "aria-label on trend icon",
+      "usage_example": "---\nimport StatCard from '@/components/data/StatCard.astro';\n---\n\n<StatCard\n  label=\"Label\"\n  value=\"value\"\n  previousValue={0}\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "display a key metric on the dashboard",
+        "KPI card showing a number and label",
+        "statistics widget for an analytics page",
+        "metric display with trend indicator",
+        "number card for tracking revenue",
+        "show a business metric on a dashboard",
+        "dashboard stat card",
+        "analytics number widget with change percentage"
+      ],
+      "position": 10
+    },
+    {
+      "component_name": "Table",
+      "category": "data",
+      "description": "Responsive data table with sortable headers, striped rows, and empty state.",
+      "import_path": "@/components/data/Table.astro",
+      "file_path": "components/data/Table.astro",
+      "props": [
+        {
+          "name": "caption",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Accessible caption for screen readers"
+        },
+        {
+          "name": "striped",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Striped row background"
+        },
+        {
+          "name": "hoverable",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Highlight row on hover"
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Compact cell padding"
+        },
+        {
+          "name": "stickyHeader",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Stick the header on scroll"
+        },
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show outer border"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "caption",
+          "description": "Accessible table caption"
+        },
+        {
+          "name": "head",
+          "description": "<tr> with <th> header cells"
+        },
+        {
+          "name": "default",
+          "description": "<tr> body rows"
+        },
+        {
+          "name": "empty",
+          "description": "Content shown when table has no rows"
+        },
+        {
+          "name": "footer",
+          "description": "Pagination or summary row"
+        }
+      ],
+      "tags": [
+        "bordered",
+        "caption",
+        "compact",
+        "content",
+        "data",
+        "data display",
+        "data grid",
+        "data table",
+        "empty",
+        "footer",
+        "grid table",
+        "head",
+        "header",
+        "headers",
+        "hoverable",
+        "list table",
+        "records table",
+        "responsive",
+        "rows",
+        "rows and columns",
+        "sortable",
+        "sortable table",
+        "spreadsheet",
+        "state",
+        "sticky",
+        "striped",
+        "table",
+        "tabular data"
+      ],
+      "accessibility_notes": "role=\"table\", scope attributes on headers, caption support",
+      "usage_example": "---\nimport Table from '@/components/data/Table.astro';\n---\n\n<Table\n\n  caption=\"example\"\n  striped={false}\n  hoverable={true}\n>\n\n  <Fragment slot=\"caption\">\n    <!-- Accessible table caption -->\n  </Fragment>\n  <Fragment slot=\"head\">\n    <!-- <tr> with <th> header cells -->\n  </Fragment>\n  Table content\n</Table>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "display data in a table",
+        "sortable data table with rows and columns",
+        "list of records in tabular format",
+        "data grid with column headers",
+        "how do I show a data table",
+        "records table with pagination",
+        "spreadsheet-style data display",
+        "table of users or products",
+        "tabular data with sorting"
+      ],
+      "position": 11
+    },
+    {
+      "component_name": "Timeline",
+      "category": "data",
+      "description": "Chronological list of events or activity steps.",
+      "import_path": "@/components/data/Timeline.astro",
+      "file_path": "components/data/Timeline.astro",
+      "props": [
+        {
+          "name": "items",
+          "type": "TimelineItem[]",
+          "required": false,
+          "default": "[]",
+          "description": "Timeline items (alternatively use slot for custom items)"
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\"",
+          "required": false,
+          "default": "\"vertical\"",
+          "description": "Layout direction"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "TimelineItem children"
+        }
+      ],
+      "tags": [
+        "activity",
+        "activity log",
+        "activity timeline",
+        "chronological",
+        "chronological list",
+        "content",
+        "data display",
+        "event list",
+        "event timeline",
+        "events",
+        "history",
+        "items",
+        "list",
+        "orientation",
+        "progress timeline",
+        "steps",
+        "time feed",
+        "timeline"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport Timeline from '@/components/data/Timeline.astro';\n---\n\n<Timeline\n\n  items=\"[]\"\n  orientation=\"vertical\"\n>\n\n  Timeline content\n</Timeline>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show a history of events in chronological order",
+        "activity timeline for a user",
+        "list of time-ordered events",
+        "progress timeline for a project",
+        "event history component",
+        "order history as a timeline",
+        "chronological activity feed"
+      ],
+      "position": 12
+    },
+    {
+      "component_name": "Alert",
+      "category": "feedback",
+      "description": "Contextual notification banners for success, warning, error, and info.",
+      "import_path": "@/components/feedback/Alert.astro",
+      "file_path": "components/feedback/Alert.astro",
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"info\" | \"success\" | \"warning\" | \"error\"",
+          "required": false,
+          "default": "\"info\"",
+          "description": "Semantic type controls color and icon"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Bold heading above the message"
+        },
+        {
+          "name": "dismissible",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Allow the user to dismiss the alert"
+        },
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Render with full-width left border accent"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "Alert body message"
+        },
+        {
+          "name": "title",
+          "description": "Optional bold heading"
+        },
+        {
+          "name": "actions",
+          "description": "Optional action buttons inside the alert"
+        }
+      ],
+      "tags": [
+        "actions",
+        "alert",
+        "alert box",
+        "alert message",
+        "banners",
+        "bordered",
+        "contextual",
+        "dismissible",
+        "error",
+        "error alert",
+        "error message",
+        "feedback",
+        "flash message",
+        "info",
+        "info alert",
+        "info message",
+        "inline notification",
+        "notification",
+        "status",
+        "status message",
+        "success",
+        "success alert",
+        "title",
+        "variant",
+        "warning",
+        "warning banner",
+        "warning message"
+      ],
+      "accessibility_notes": "role=\"alert\" for errors, role=\"status\" for informational",
+      "usage_example": "---\nimport Alert from '@/components/feedback/Alert.astro';\n---\n\n<Alert\n\n  variant=\"info\"\n  title=\"Title\"\n  dismissible={false}\n>\n\n  <Fragment slot=\"title\">\n    <!-- Optional bold heading -->\n  </Fragment>\n  <Fragment slot=\"actions\">\n    <!-- Optional action buttons inside the alert -->\n  </Fragment>\n  Alert content\n</Alert>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show an error message to the user",
+        "success notification after form submission",
+        "warning banner at top of the page",
+        "informational alert message",
+        "inline error notification",
+        "dismissible alert box",
+        "how do I display validation errors",
+        "flash message for user feedback",
+        "status message component"
+      ],
+      "position": 13
+    },
+    {
+      "component_name": "Modal",
+      "category": "feedback",
+      "description": "Accessible dialog overlay for confirmations, forms, and detail views.",
+      "import_path": "@/components/feedback/Modal.astro",
+      "file_path": "components/feedback/Modal.astro",
+      "props": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Unique id — used for aria-labelledby"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Modal title (also sets aria-label if no header slot)"
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Size preset"
+        },
+        {
+          "name": "closeOnBackdrop",
+          "type": "boolean",
+          "required": false,
+          "default": "",
+          "description": "Allow closing by clicking the backdrop"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether the modal is initially open (SSR static)"
+        }
+      ],
+      "slots": [
+        {
+          "name": "header",
+          "description": "Modal title area"
+        },
+        {
+          "name": "default",
+          "description": "Modal body content"
+        },
+        {
+          "name": "footer",
+          "description": "Action buttons row"
+        }
+      ],
+      "tags": [
+        "accessible",
+        "alert dialog",
+        "backdrop",
+        "close",
+        "confirmation dialog",
+        "confirmations",
+        "detail",
+        "dialog",
+        "dialog box",
+        "feedback",
+        "footer",
+        "form modal",
+        "forms",
+        "header",
+        "lightbox",
+        "modal",
+        "modal dialog",
+        "modal popup",
+        "notification",
+        "open",
+        "overlay",
+        "popup",
+        "side sheet",
+        "size",
+        "status",
+        "title",
+        "views"
+      ],
+      "accessibility_notes": "role=\"dialog\", aria-modal, aria-labelledby, focus-trap via JS",
+      "usage_example": "---\nimport Modal from '@/components/feedback/Modal.astro';\n---\n\n<Modal\n\n  title=\"Title\"\n  size=\"md\"\n  closeOnBackdrop={false}\n>\n\n  <Fragment slot=\"header\">\n    <!-- Modal title area -->\n  </Fragment>\n  <Fragment slot=\"footer\">\n    <!-- Action buttons row -->\n  </Fragment>\n  Modal content\n</Modal>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show a popup dialog",
+        "confirmation dialog before deleting an item",
+        "modal with a form inside",
+        "overlay popup with content",
+        "alert dialog asking the user to confirm",
+        "how do I create a modal in astro",
+        "dialog that opens on a button click",
+        "lightbox overlay popup",
+        "modal with a close button"
+      ],
+      "position": 14
+    },
+    {
+      "component_name": "ProgressBar",
+      "category": "feedback",
+      "description": "Visual progress indicator for tasks, uploads, and multi-step flows.",
+      "import_path": "@/components/feedback/ProgressBar.astro",
+      "file_path": "components/feedback/ProgressBar.astro",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "default": "",
+          "description": "Current progress (0–100)"
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "required": false,
+          "default": "0",
+          "description": "Minimum value"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "default": "100",
+          "description": "Maximum value"
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Display the percentage label"
+        },
+        {
+          "name": "variant",
+          "type": "\"primary\" | \"success\" | \"warning\" | \"danger\"",
+          "required": false,
+          "default": "\"primary\"",
+          "description": "Color variant"
+        },
+        {
+          "name": "size",
+          "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Height size"
+        },
+        {
+          "name": "striped",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Animated stripe effect"
+        },
+        {
+          "name": "indeterminate",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Pulse animation for indeterminate state"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "\"Progress\"",
+          "description": "Accessible label"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "bar",
+        "completion bar",
+        "download progress",
+        "feedback",
+        "flows",
+        "indeterminate",
+        "indicator",
+        "label",
+        "loading bar",
+        "max",
+        "min",
+        "multi",
+        "notification",
+        "percentage bar",
+        "progress",
+        "progress bar",
+        "progressbar",
+        "show",
+        "size",
+        "status",
+        "step",
+        "step progress",
+        "striped",
+        "task progress",
+        "tasks",
+        "upload progress",
+        "uploads",
+        "value",
+        "variant",
+        "visual"
+      ],
+      "accessibility_notes": "role=\"progressbar\", aria-valuenow, aria-valuemin, aria-valuemax",
+      "usage_example": "---\nimport ProgressBar from '@/components/feedback/ProgressBar.astro';\n---\n\n<ProgressBar\n  value=\"value\"\n  min={0}\n  max={100}\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show upload progress to the user",
+        "progress bar for a loading operation",
+        "percentage completion bar",
+        "download progress indicator",
+        "task completion progress display",
+        "step progress bar for a multi-step form",
+        "loading bar with percentage"
+      ],
+      "position": 15
+    },
+    {
+      "component_name": "Skeleton",
+      "category": "feedback",
+      "description": "Animated loading placeholder for content areas.",
+      "import_path": "@/components/feedback/Skeleton.astro",
+      "file_path": "components/feedback/Skeleton.astro",
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"text\" | \"circle\" | \"rect\" | \"card\"",
+          "required": false,
+          "default": "\"rect\"",
+          "description": "Shape preset"
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": "\"100%\"",
+          "description": "Width (CSS value or Tailwind class approach)"
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "default": "\"1rem\"",
+          "description": "Height (CSS value)"
+        },
+        {
+          "name": "lines",
+          "type": "number",
+          "required": false,
+          "default": "3",
+          "description": "Number of text lines to show (only for variant=\"text\")"
+        },
+        {
+          "name": "pulse",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Pulse animation (true) vs. wave shimmer (false)"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "animated",
+        "areas",
+        "content",
+        "content placeholder",
+        "feedback",
+        "ghost element",
+        "height",
+        "lines",
+        "loading",
+        "loading placeholder",
+        "loading skeleton",
+        "loading state",
+        "notification",
+        "placeholder",
+        "pulse",
+        "shimmer",
+        "skeleton",
+        "skeleton screen",
+        "status",
+        "variant",
+        "width"
+      ],
+      "accessibility_notes": "aria-busy, aria-label for screen readers",
+      "usage_example": "---\nimport Skeleton from '@/components/feedback/Skeleton.astro';\n---\n\n<Skeleton\n  variant=\"rect\"\n  width=\"100%\"\n  height=\"1rem\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show a loading placeholder while content loads",
+        "skeleton screen before data arrives",
+        "shimmer loading effect for a card",
+        "ghost placeholder for list items",
+        "content placeholder animation",
+        "how do I show loading placeholders",
+        "skeleton loader for images and text",
+        "loading state that looks like the content shape"
+      ],
+      "position": 16
+    },
+    {
+      "component_name": "Toast",
+      "category": "feedback",
+      "description": "Brief auto-dismissing notification overlay.",
+      "import_path": "@/components/feedback/Toast.astro",
+      "file_path": "components/feedback/Toast.astro",
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"info\" | \"success\" | \"warning\" | \"error\"",
+          "required": false,
+          "default": "\"info\"",
+          "description": "Notification type"
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Toast message"
+        },
+        {
+          "name": "position",
+          "type": "\"top-right\" | \"top-left\" | \"bottom-right\" | \"bottom-left\" | \"top-center\"",
+          "required": false,
+          "default": "\"top-right\"",
+          "description": "Position on screen"
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "default": "4000",
+          "description": "Auto-dismiss duration in milliseconds (0 = persistent)"
+        },
+        {
+          "name": "dismissible",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show a close button"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "auto",
+        "auto dismiss",
+        "brief",
+        "brief notification",
+        "dismissible",
+        "dismissing",
+        "duration",
+        "error toast",
+        "feedback",
+        "floating notification",
+        "message",
+        "notification",
+        "overlay",
+        "popup notification",
+        "position",
+        "snackbar",
+        "status",
+        "success toast",
+        "toast",
+        "toast message",
+        "toast notification",
+        "variant"
+      ],
+      "accessibility_notes": "aria-live=\"polite\", role=\"status\"",
+      "usage_example": "---\nimport Toast from '@/components/feedback/Toast.astro';\n---\n\n<Toast\n  variant=\"info\"\n  message=\"Your message here\"\n  position=\"top-right\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show a brief notification that disappears automatically",
+        "auto-dismissing success message",
+        "snackbar-style notification",
+        "floating notification after saving",
+        "toast for error feedback",
+        "brief popup feedback message",
+        "how do I show toast notifications",
+        "notification that fades out after a few seconds"
+      ],
+      "position": 17
+    },
+    {
+      "component_name": "Checkbox",
+      "category": "forms",
+      "description": "Accessible checkbox input with label and description.",
+      "import_path": "@/components/forms/Checkbox.astro",
+      "file_path": "components/forms/Checkbox.astro",
+      "props": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Unique id"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Label text"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Additional description below the label"
+        },
+        {
+          "name": "checked",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Checked state"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disabled state"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Error message"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Name for form grouping"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "\"on\"",
+          "description": "Value submitted with form"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "accessible",
+        "agree checkbox",
+        "boolean input",
+        "check box",
+        "check option",
+        "checkbox",
+        "checked",
+        "data entry",
+        "description",
+        "disabled",
+        "error",
+        "form",
+        "input",
+        "label",
+        "multi select option",
+        "name",
+        "terms checkbox",
+        "tick box",
+        "toggle",
+        "user input",
+        "value"
+      ],
+      "accessibility_notes": "role=\"checkbox\", aria-checked, keyboard support",
+      "usage_example": "---\nimport Checkbox from '@/components/forms/Checkbox.astro';\n---\n\n<Checkbox\n  label=\"Label\"\n  description=\"example\"\n  checked={false}\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "checkbox for user agreement",
+        "terms and conditions agreement checkbox",
+        "boolean yes or no option in a form",
+        "agree to terms tick box",
+        "remember me checkbox",
+        "checkbox with accessible label",
+        "multi-select option checkboxes",
+        "toggle boolean form field"
+      ],
+      "position": 18
+    },
+    {
+      "component_name": "Input",
+      "category": "forms",
+      "description": "Accessible text input field with label, helper text, and error state.",
+      "import_path": "@/components/forms/Input.astro",
+      "file_path": "components/forms/Input.astro",
+      "props": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Unique id — required for label association"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Field label text"
+        },
+        {
+          "name": "type",
+          "type": "\"text\" | \"email\" | \"password\" | \"number\" | \"tel\" | \"url\" | \"search\" | \"date\"",
+          "required": false,
+          "default": "\"text\"",
+          "description": "Input type"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Placeholder text"
+        },
+        {
+          "name": "value",
+          "type": "string | number",
+          "required": false,
+          "default": "",
+          "description": "Current value"
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Marks field as required"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disabled state"
+        },
+        {
+          "name": "readonly",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Read-only state"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Error message (triggers error styling)"
+        },
+        {
+          "name": "helper",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Helper text shown below the input"
+        },
+        {
+          "name": "prefix",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Prepend icon or text"
+        },
+        {
+          "name": "suffix",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Append icon or text"
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Size variant"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes for the <input> element"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "accessible",
+        "data entry",
+        "disabled",
+        "email input",
+        "error",
+        "field",
+        "form",
+        "form field",
+        "form input",
+        "helper",
+        "input",
+        "input field",
+        "label",
+        "number input",
+        "password input",
+        "phone input",
+        "placeholder",
+        "prefix",
+        "readonly",
+        "required",
+        "search input",
+        "size",
+        "state",
+        "suffix",
+        "text",
+        "text box",
+        "text field",
+        "text input",
+        "type",
+        "user input",
+        "user input field",
+        "value"
+      ],
+      "accessibility_notes": "aria-describedby links input to helper/error, aria-invalid on error",
+      "usage_example": "---\nimport Input from '@/components/forms/Input.astro';\n---\n\n<Input\n  label=\"Label\"\n  type=\"text\"\n  placeholder=\"Enter text...\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "text input field for a form",
+        "email input with label and error state",
+        "password input field",
+        "form input for user data entry",
+        "search input field with icon",
+        "phone number text input",
+        "input with placeholder and validation error",
+        "how do I create a text field",
+        "labelled input with helper text",
+        "numeric input field"
+      ],
+      "position": 19
+    },
+    {
+      "component_name": "SearchBar",
+      "category": "forms",
+      "description": "Search input field with icon, clear button, and keyboard shortcut hint.",
+      "import_path": "@/components/forms/SearchBar.astro",
+      "file_path": "components/forms/SearchBar.astro",
+      "props": [
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": "\"Search...\"",
+          "description": "Placeholder text"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Current search value"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "\"q\"",
+          "description": "Input name attribute"
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Size preset"
+        },
+        {
+          "name": "shortcut",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Show keyboard shortcut hint (e.g., ⌘K)"
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Submit action URL (turns into a form)"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disabled state"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "action",
+        "bar",
+        "button",
+        "clear",
+        "data entry",
+        "disabled",
+        "field",
+        "filter bar",
+        "find input",
+        "form",
+        "hint",
+        "icon",
+        "input",
+        "keyboard",
+        "name",
+        "placeholder",
+        "query input",
+        "search",
+        "search bar",
+        "search box",
+        "search component",
+        "search field",
+        "search form",
+        "search input",
+        "searchbar",
+        "shortcut",
+        "size",
+        "user input",
+        "value"
+      ],
+      "accessibility_notes": "role=\"search\", aria-label, keyboard accessible clear button",
+      "usage_example": "---\nimport SearchBar from '@/components/forms/SearchBar.astro';\n---\n\n<SearchBar\n  placeholder=\"Search...\"\n  value=\"value\"\n  name=\"q\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "search bar for filtering content",
+        "search input at top of the page",
+        "filter bar to find items by name",
+        "site search component",
+        "search with a magnifying glass icon",
+        "how do I add search to my page",
+        "input to search or filter a list",
+        "query input for searching records"
+      ],
+      "position": 20
+    },
+    {
+      "component_name": "Select",
+      "category": "forms",
+      "description": "Styled native dropdown select with label and error support.",
+      "import_path": "@/components/forms/Select.astro",
+      "file_path": "components/forms/Select.astro",
+      "props": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Unique id for label association"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Field label"
+        },
+        {
+          "name": "options",
+          "type": "SelectOption[]",
+          "required": true,
+          "default": "",
+          "description": "Available options"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Currently selected value"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": "\"Select an option\"",
+          "description": "Placeholder option text"
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Mark as required"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disabled state"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Error message"
+        },
+        {
+          "name": "helper",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Helper text"
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Size preset"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "choice selector",
+        "combobox",
+        "data entry",
+        "disabled",
+        "dropdown",
+        "error",
+        "form",
+        "form dropdown",
+        "helper",
+        "input",
+        "label",
+        "native",
+        "option list",
+        "option picker",
+        "options",
+        "placeholder",
+        "required",
+        "select",
+        "select box",
+        "select dropdown",
+        "select menu",
+        "size",
+        "styled",
+        "support",
+        "user input",
+        "value"
+      ],
+      "accessibility_notes": "aria-invalid, aria-describedby, required attribute",
+      "usage_example": "---\nimport Select from '@/components/forms/Select.astro';\n---\n\n<Select\n  label=\"Label\"\n  value=\"value\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "dropdown select menu in a form",
+        "option picker for choosing a value",
+        "country select dropdown",
+        "form dropdown with multiple options",
+        "single choice selector",
+        "select input for a category",
+        "pick from a list of options",
+        "combobox for a form field"
+      ],
+      "position": 21
+    },
+    {
+      "component_name": "Textarea",
+      "category": "forms",
+      "description": "Multi-line text input with character count and error support.",
+      "import_path": "@/components/forms/Textarea.astro",
+      "file_path": "components/forms/Textarea.astro",
+      "props": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Unique id for label association"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Label text"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Placeholder text"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Current value"
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "required": false,
+          "default": "4",
+          "description": "Number of visible text rows"
+        },
+        {
+          "name": "maxLength",
+          "type": "number",
+          "required": false,
+          "default": "",
+          "description": "Maximum character count"
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Mark as required"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disabled state"
+        },
+        {
+          "name": "resize",
+          "type": "\"none\" | \"vertical\" | \"horizontal\" | \"both\"",
+          "required": false,
+          "default": "\"vertical\"",
+          "description": "Resize behavior"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Error message"
+        },
+        {
+          "name": "helper",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Helper text"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "bio field",
+        "character",
+        "comment box",
+        "count",
+        "data entry",
+        "description field",
+        "disabled",
+        "error",
+        "form",
+        "helper",
+        "input",
+        "label",
+        "length",
+        "line",
+        "long text input",
+        "max",
+        "message field",
+        "multi",
+        "multiline input",
+        "multiline text",
+        "notes field",
+        "placeholder",
+        "required",
+        "resize",
+        "rows",
+        "support",
+        "text",
+        "text area",
+        "textarea",
+        "user input",
+        "value"
+      ],
+      "accessibility_notes": "aria-invalid, aria-describedby, aria-required",
+      "usage_example": "---\nimport Textarea from '@/components/forms/Textarea.astro';\n---\n\n<Textarea\n  label=\"Label\"\n  placeholder=\"Enter text...\"\n  value=\"value\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "multi-line text input for messages",
+        "comment box in a form",
+        "large text field for long descriptions",
+        "biography input field",
+        "user message or note text area",
+        "notes field with multiple lines",
+        "long text entry component"
+      ],
+      "position": 22
+    },
+    {
+      "component_name": "Container",
+      "category": "layout",
+      "description": "Max-width content wrapper with responsive horizontal padding.",
+      "import_path": "@/components/layout/Container.astro",
+      "file_path": "components/layout/Container.astro",
+      "props": [
+        {
+          "name": "maxWidth",
+          "type": "\"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"full\"",
+          "required": false,
+          "default": "\"xl\"",
+          "description": "Maximum width breakpoint: sm | md | lg | xl | 2xl | full"
+        },
+        {
+          "name": "padding",
+          "type": "\"none\" | \"sm\" | \"md\" | \"lg\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Horizontal padding size: none | sm | md | lg"
+        },
+        {
+          "name": "centered",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Center the container horizontally"
+        },
+        {
+          "name": "as",
+          "type": "string",
+          "required": false,
+          "default": "\"div\"",
+          "description": "HTML element to render as"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "Any page content"
+        }
+      ],
+      "tags": [
+        "center content",
+        "centered",
+        "container",
+        "content",
+        "content container",
+        "horizontal",
+        "layout",
+        "layout wrapper",
+        "max",
+        "max width",
+        "padding",
+        "page layout",
+        "page wrapper",
+        "responsive",
+        "section wrapper",
+        "structure",
+        "width",
+        "wrapper"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport Container from '@/components/layout/Container.astro';\n---\n\n<Container\n\n  maxWidth=\"xl\"\n  padding=\"md\"\n  centered={true}\n>\n\n  Container content\n</Container>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "center my page content within a max width",
+        "max width wrapper for page layout",
+        "content container with horizontal padding",
+        "how do I constrain layout width and center it",
+        "page wrapper that limits how wide content stretches",
+        "section wrapper with responsive padding",
+        "layout container component",
+        "center content on page with limited width"
+      ],
+      "position": 23
+    },
+    {
+      "component_name": "Footer",
+      "category": "layout",
+      "description": "Site-wide footer with column links and copyright notice.",
+      "import_path": "@/components/layout/Footer.astro",
+      "file_path": "components/layout/Footer.astro",
+      "props": [
+        {
+          "name": "brandName",
+          "type": "string",
+          "required": false,
+          "default": "\"Company\"",
+          "description": "Company or brand name for the copyright line"
+        },
+        {
+          "name": "year",
+          "type": "number",
+          "required": false,
+          "default": "new Date().getFullYear()",
+          "description": "Copyright year (defaults to current year)"
+        },
+        {
+          "name": "tagline",
+          "type": "string",
+          "required": false,
+          "default": "\"Building great products.\"",
+          "description": "Tagline shown under the brand name"
+        },
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show a top divider border"
+        },
+        {
+          "name": "dark",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Dark background variant"
+        }
+      ],
+      "slots": [
+        {
+          "name": "columns",
+          "description": "Footer link column groups"
+        },
+        {
+          "name": "social",
+          "description": "Social media icon links"
+        },
+        {
+          "name": "legal",
+          "description": "Extra legal/policy links row"
+        }
+      ],
+      "tags": [
+        "bordered",
+        "bottom section",
+        "brand",
+        "column",
+        "columns",
+        "copyright",
+        "dark",
+        "footer",
+        "footer links",
+        "footer navigation",
+        "layout",
+        "legal",
+        "links",
+        "name",
+        "notice",
+        "page footer",
+        "page layout",
+        "site",
+        "site footer",
+        "social",
+        "structure",
+        "tagline",
+        "wide",
+        "year"
+      ],
+      "accessibility_notes": "role=\"contentinfo\", landmark region",
+      "usage_example": "---\nimport Footer from '@/components/layout/Footer.astro';\n---\n\n<Footer\n\n  brandName=\"Company\"\n  year=\"new Date().getFullYear()\"\n  tagline=\"Building great products.\"\n>\n\n  <Fragment slot=\"columns\">\n    <!-- Footer link column groups -->\n  </Fragment>\n  <Fragment slot=\"social\">\n    <!-- Social media icon links -->\n  </Fragment>\n</Footer>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "add a footer to my page",
+        "site footer with links and copyright notice",
+        "page footer with multiple link columns",
+        "bottom section with contact information and links",
+        "footer with social media links",
+        "how do I add a footer to my astro site",
+        "website bottom navigation and copyright",
+        "footer with company info and site links"
+      ],
+      "position": 24
+    },
+    {
+      "component_name": "Grid",
+      "category": "layout",
+      "description": "Responsive CSS Grid layout system.",
+      "import_path": "@/components/layout/Grid.astro",
+      "file_path": "components/layout/Grid.astro",
+      "props": [
+        {
+          "name": "cols",
+          "type": "1 | 2 | 3 | 4 | 6 | 12",
+          "required": false,
+          "default": "3",
+          "description": "Number of columns on desktop (1–12)"
+        },
+        {
+          "name": "colsMd",
+          "type": "1 | 2 | 3 | 4 | 6 | 12",
+          "required": false,
+          "default": "2",
+          "description": "Column count on tablet"
+        },
+        {
+          "name": "colsSm",
+          "type": "1 | 2 | 3",
+          "required": false,
+          "default": "1",
+          "description": "Column count on mobile"
+        },
+        {
+          "name": "gap",
+          "type": "\"none\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Gap between items: none | sm | md | lg | xl"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "Grid child items"
+        }
+      ],
+      "tags": [
+        "card grid",
+        "cols",
+        "column layout",
+        "css",
+        "css grid",
+        "gallery grid",
+        "gap",
+        "grid",
+        "layout",
+        "layout grid",
+        "multi column",
+        "page layout",
+        "responsive",
+        "responsive grid",
+        "structure",
+        "system"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport Grid from '@/components/layout/Grid.astro';\n---\n\n<Grid\n\n  cols={3}\n  colsMd={2}\n  colsSm={1}\n>\n\n  Grid content\n</Grid>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "create a responsive multi-column grid layout",
+        "arrange items in a grid",
+        "card grid with responsive columns",
+        "css grid layout for a gallery",
+        "three column layout that stacks on mobile",
+        "responsive column arrangement for cards",
+        "grid of images or cards",
+        "gallery layout with even columns"
+      ],
+      "position": 25
+    },
+    {
+      "component_name": "Navbar",
+      "category": "layout",
+      "description": "Responsive sticky top navigation bar.",
+      "import_path": "@/components/layout/Navbar.astro",
+      "file_path": "components/layout/Navbar.astro",
+      "props": [
+        {
+          "name": "logoText",
+          "type": "string",
+          "required": false,
+          "default": "\"Brand\"",
+          "description": "Brand name shown when no logo slot is provided"
+        },
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Render a bottom border and drop shadow"
+        },
+        {
+          "name": "transparent",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Use a glass / transparent background"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Extra CSS classes applied to the <header>"
+        }
+      ],
+      "slots": [
+        {
+          "name": "logo",
+          "description": "Custom logo/brand content"
+        },
+        {
+          "name": "links",
+          "description": "Navigation anchor items"
+        },
+        {
+          "name": "actions",
+          "description": "Right-side CTA buttons (login, signup, etc.)"
+        }
+      ],
+      "tags": [
+        "actions",
+        "bar",
+        "bordered",
+        "hamburger menu",
+        "header",
+        "layout",
+        "links",
+        "logo",
+        "main navigation",
+        "menu bar",
+        "mobile menu",
+        "navbar",
+        "navigation",
+        "navigation bar",
+        "navigation header",
+        "page layout",
+        "responsive",
+        "responsive nav",
+        "site header",
+        "sticky",
+        "structure",
+        "text",
+        "top",
+        "top nav",
+        "top navigation",
+        "transparent"
+      ],
+      "accessibility_notes": "aria-label on nav, aria-expanded on mobile toggle, sr-only skip text",
+      "usage_example": "---\nimport Navbar from '@/components/layout/Navbar.astro';\n---\n\n<Navbar\n\n  logoText=\"Brand\"\n  bordered={true}\n  transparent={false}\n>\n\n  <Fragment slot=\"logo\">\n    <!-- Custom logo/brand content -->\n  </Fragment>\n  <Fragment slot=\"links\">\n    <!-- Navigation anchor items -->\n  </Fragment>\n</Navbar>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "add a navigation bar to the top of my page",
+        "I need a responsive navbar with a hamburger menu",
+        "how do I create a sticky header with navigation links",
+        "site header with logo and nav links",
+        "mobile-friendly top navigation that collapses on small screens",
+        "navigation bar with dropdown menus",
+        "header component for my website",
+        "responsive header that collapses on mobile",
+        "top nav with logo on the left and links on the right"
+      ],
+      "position": 26
+    },
+    {
+      "component_name": "Sidebar",
+      "category": "layout",
+      "description": "Collapsible vertical navigation sidebar for dashboards and apps.",
+      "import_path": "@/components/layout/Sidebar.astro",
+      "file_path": "components/layout/Sidebar.astro",
+      "props": [
+        {
+          "name": "collapsed",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Default collapsed state on mobile"
+        },
+        {
+          "name": "fixed",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Fixed position (true) or static in flow"
+        },
+        {
+          "name": "width",
+          "type": "number",
+          "required": false,
+          "default": "256",
+          "description": "Pixel width of the expanded sidebar"
+        },
+        {
+          "name": "dark",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Dark variant"
+        }
+      ],
+      "slots": [
+        {
+          "name": "header",
+          "description": "Top section (logo / workspace switcher)"
+        },
+        {
+          "name": "navigation",
+          "description": "Nav item groups"
+        },
+        {
+          "name": "footer",
+          "description": "Bottom section (user profile, settings link)"
+        }
+      ],
+      "tags": [
+        "apps",
+        "collapsed",
+        "collapsible",
+        "collapsible menu",
+        "dark",
+        "dashboard sidebar",
+        "dashboards",
+        "drawer",
+        "fixed",
+        "footer",
+        "header",
+        "layout",
+        "left panel",
+        "nav drawer",
+        "navigation",
+        "page layout",
+        "side menu",
+        "side navigation",
+        "sidebar",
+        "structure",
+        "vertical",
+        "vertical navigation",
+        "width"
+      ],
+      "accessibility_notes": "aria-label, aria-current on active item, keyboard navigable",
+      "usage_example": "---\nimport Sidebar from '@/components/layout/Sidebar.astro';\n---\n\n<Sidebar\n\n  collapsed={false}\n  fixed={true}\n  width={256}\n>\n\n  <Fragment slot=\"header\">\n    <!-- Top section (logo / workspace switcher) -->\n  </Fragment>\n  <Fragment slot=\"navigation\">\n    <!-- Nav item groups -->\n  </Fragment>\n</Sidebar>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "I need a sidebar for my dashboard",
+        "collapsible side navigation menu",
+        "left panel navigation for an admin layout",
+        "dashboard sidebar with icon and label links",
+        "vertical navigation drawer that can be toggled",
+        "side menu for admin panel",
+        "expandable sidebar with grouped navigation items",
+        "nav drawer for a multi-page application",
+        "responsive sidebar that collapses on mobile"
+      ],
+      "position": 27
+    },
+    {
+      "component_name": "CTASection",
+      "category": "marketing",
+      "description": "Full-width call-to-action section with headline and action buttons.",
+      "import_path": "@/components/marketing/CTASection.astro",
+      "file_path": "components/marketing/CTASection.astro",
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Section headline"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Supporting description"
+        },
+        {
+          "name": "background",
+          "type": "\"blue\" | \"dark\" | \"light\" | \"gradient\"",
+          "required": false,
+          "default": "\"blue\"",
+          "description": "Background style"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "description": "Primary and secondary CTA buttons"
+        }
+      ],
+      "tags": [
+        "a",
+        "action",
+        "action section",
+        "actions",
+        "background",
+        "buttons",
+        "c",
+        "c t a section",
+        "call",
+        "call to action",
+        "conversion section",
+        "cta banner",
+        "cta section",
+        "ctasection",
+        "description",
+        "full",
+        "get started section",
+        "heading",
+        "headline",
+        "landing page",
+        "marketing",
+        "promo section",
+        "section",
+        "sign up section",
+        "t",
+        "width"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport CTASection from '@/components/marketing/CTASection.astro';\n---\n\n<CTASection\n\n  heading=\"Heading\"\n  description=\"example\"\n  background=\"blue\"\n>\n\n  <Fragment slot=\"actions\">\n    <!-- Primary and secondary CTA buttons -->\n  </Fragment>\n</CTASection>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "call to action section at the bottom of the page",
+        "sign up CTA banner",
+        "conversion section with a button",
+        "get started section for a landing page",
+        "promo section prompting users to take action",
+        "marketing section with an action button",
+        "bottom of page conversion section",
+        "prompt users to register or sign up"
+      ],
+      "position": 28
+    },
+    {
+      "component_name": "FeatureGrid",
+      "category": "marketing",
+      "description": "Marketing section displaying a grid of product features with icons.",
+      "import_path": "@/components/marketing/FeatureGrid.astro",
+      "file_path": "components/marketing/FeatureGrid.astro",
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Section headline"
+        },
+        {
+          "name": "subheading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Section subheading"
+        },
+        {
+          "name": "features",
+          "type": "Feature[]",
+          "required": false,
+          "default": "[]",
+          "description": "Feature definitions (or use slot for custom cards)"
+        },
+        {
+          "name": "cols",
+          "type": "2 | 3 | 4",
+          "required": false,
+          "default": "3",
+          "description": "Number of columns"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "FeatureItem children or custom feature cards"
+        }
+      ],
+      "tags": [
+        "benefits section",
+        "capabilities",
+        "cols",
+        "displaying",
+        "feature",
+        "feature grid",
+        "feature list",
+        "featuregrid",
+        "features",
+        "features section",
+        "grid",
+        "heading",
+        "highlights",
+        "icons",
+        "landing page",
+        "marketing",
+        "marketing features",
+        "product",
+        "product features",
+        "section",
+        "subheading"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport FeatureGrid from '@/components/marketing/FeatureGrid.astro';\n---\n\n<FeatureGrid\n\n  heading=\"Heading\"\n  subheading=\"example\"\n  features=\"[]\"\n>\n\n  FeatureGrid content\n</FeatureGrid>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "display product features on a landing page",
+        "features section with icons and descriptions",
+        "benefits grid for a marketing page",
+        "product highlights section",
+        "why choose us section",
+        "feature cards arranged in a grid",
+        "capabilities list on homepage",
+        "marketing feature highlights section"
+      ],
+      "position": 29
+    },
+    {
+      "component_name": "Hero",
+      "category": "marketing",
+      "description": "Full-width landing page hero section with headline, subtext, and CTA buttons.",
+      "import_path": "@/components/marketing/Hero.astro",
+      "file_path": "components/marketing/Hero.astro",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Main headline text"
+        },
+        {
+          "name": "subtitle",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Supporting paragraph"
+        },
+        {
+          "name": "layout",
+          "type": "\"centered\" | \"split\"",
+          "required": false,
+          "default": "\"centered\"",
+          "description": "Layout: centered (full-width) or split (text + media)"
+        },
+        {
+          "name": "background",
+          "type": "\"white\" | \"light\" | \"gradient\" | \"dark\"",
+          "required": false,
+          "default": "\"white\"",
+          "description": "Background style"
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+          "required": false,
+          "default": "\"lg\"",
+          "description": "Top padding size"
+        }
+      ],
+      "slots": [
+        {
+          "name": "eyebrow",
+          "description": "Small label/badge above the headline"
+        },
+        {
+          "name": "headline",
+          "description": "Main H1 headline (overrides title prop)"
+        },
+        {
+          "name": "subtext",
+          "description": "Supporting description paragraph"
+        },
+        {
+          "name": "actions",
+          "description": "Primary and secondary CTA buttons"
+        },
+        {
+          "name": "media",
+          "description": "Right-side image or illustration (two-column layout)"
+        }
+      ],
+      "tags": [
+        "above the fold",
+        "actions",
+        "background",
+        "banner",
+        "buttons",
+        "cta",
+        "eyebrow",
+        "full",
+        "headline",
+        "headline section",
+        "hero",
+        "hero banner",
+        "hero section",
+        "homepage hero",
+        "intro section",
+        "jumbotron",
+        "landing",
+        "landing page",
+        "landing page hero",
+        "layout",
+        "marketing",
+        "marketing hero",
+        "media",
+        "page",
+        "section",
+        "size",
+        "subtext",
+        "subtitle",
+        "title",
+        "welcome section",
+        "width"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport Hero from '@/components/marketing/Hero.astro';\n---\n\n<Hero\n\n  title=\"Title\"\n  subtitle=\"example\"\n  layout=\"centered\"\n>\n\n  <Fragment slot=\"eyebrow\">\n    <!-- Small label/badge above the headline -->\n  </Fragment>\n  <Fragment slot=\"headline\">\n    <!-- Main H1 headline (overrides title prop) -->\n  </Fragment>\n</Hero>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "hero section for a landing page",
+        "big banner at the top of the homepage",
+        "above the fold intro section with headline and button",
+        "marketing hero with CTA",
+        "landing page hero banner",
+        "jumbotron with a call to action button",
+        "homepage welcome section with headline",
+        "full-width intro section with background image",
+        "homepage first section",
+        "headline section with subtext and button"
+      ],
+      "position": 30
+    },
+    {
+      "component_name": "PricingCard",
+      "category": "marketing",
+      "description": "Pricing tier card showing plan name, price, features, and CTA.",
+      "import_path": "@/components/marketing/PricingCard.astro",
+      "file_path": "components/marketing/PricingCard.astro",
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Plan name (e.g., Starter, Pro, Enterprise)"
+        },
+        {
+          "name": "price",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Price string (e.g., \"$29\")"
+        },
+        {
+          "name": "period",
+          "type": "string",
+          "required": false,
+          "default": "\"/ month\"",
+          "description": "Billing period (e.g., \"/ month\")"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Short plan description"
+        },
+        {
+          "name": "featured",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Highlight this as the recommended / featured plan"
+        },
+        {
+          "name": "badge",
+          "type": "string",
+          "required": false,
+          "default": "\"Most Popular\"",
+          "description": "Badge text for featured plans"
+        }
+      ],
+      "slots": [
+        {
+          "name": "features",
+          "description": "List of included feature items"
+        },
+        {
+          "name": "cta",
+          "description": "Call-to-action button"
+        }
+      ],
+      "tags": [
+        "badge",
+        "card",
+        "cta",
+        "description",
+        "featured",
+        "features",
+        "landing page",
+        "marketing",
+        "name",
+        "period",
+        "plan",
+        "plan card",
+        "plan selection",
+        "price",
+        "price card",
+        "pricing",
+        "pricing card",
+        "pricing page",
+        "pricing table",
+        "pricing tier",
+        "pricingcard",
+        "showing",
+        "subscription plan",
+        "tier"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport PricingCard from '@/components/marketing/PricingCard.astro';\n---\n\n<PricingCard\n\n  name=\"field-name\"\n  price=\"example\"\n  period=\"/ month\"\n>\n\n  <Fragment slot=\"features\">\n    <!-- List of included feature items -->\n  </Fragment>\n  <Fragment slot=\"cta\">\n    <!-- Call-to-action button -->\n  </Fragment>\n</PricingCard>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "pricing plan card for a SaaS product",
+        "subscription tier display",
+        "plan selection card with features list",
+        "show pricing options to users",
+        "price card with monthly and annual toggle",
+        "pricing table card",
+        "premium and free plan cards",
+        "pricing page card component"
+      ],
+      "position": 31
+    },
+    {
+      "component_name": "Testimonial",
+      "category": "marketing",
+      "description": "Customer quote card with avatar, name, role, and star rating.",
+      "import_path": "@/components/marketing/Testimonial.astro",
+      "file_path": "components/marketing/Testimonial.astro",
+      "props": [
+        {
+          "name": "quote",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Quote text"
+        },
+        {
+          "name": "authorName",
+          "type": "string",
+          "required": true,
+          "default": "",
+          "description": "Customer full name"
+        },
+        {
+          "name": "authorRole",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Job title / company"
+        },
+        {
+          "name": "authorImage",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Avatar image URL"
+        },
+        {
+          "name": "rating",
+          "type": "number",
+          "required": false,
+          "default": "5",
+          "description": "Star rating 1–5"
+        },
+        {
+          "name": "variant",
+          "type": "\"card\" | \"minimal\" | \"featured\"",
+          "required": false,
+          "default": "\"card\"",
+          "description": "Card or minimal style"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "quote",
+          "description": "Full testimonial quote text (overrides quote prop)"
+        }
+      ],
+      "tags": [
+        "author",
+        "avatar",
+        "card",
+        "customer",
+        "customer review",
+        "customer testimonial",
+        "feedback card",
+        "image",
+        "landing page",
+        "marketing",
+        "name",
+        "quote",
+        "rating",
+        "recommendation",
+        "review",
+        "role",
+        "social proof",
+        "star",
+        "star rating",
+        "testimonial",
+        "user review",
+        "variant"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport Testimonial from '@/components/marketing/Testimonial.astro';\n---\n\n<Testimonial\n\n  quote=\"example\"\n  authorName=\"example\"\n  authorRole=\"example\"\n>\n\n  <Fragment slot=\"quote\">\n    <!-- Full testimonial quote text (overrides quote prop) -->\n  </Fragment>\n</Testimonial>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show customer reviews on my landing page",
+        "testimonial section with quotes and photos",
+        "social proof component",
+        "customer review card with star rating",
+        "what customers are saying section",
+        "user testimonial with author name and photo",
+        "feedback card from a satisfied customer",
+        "endorsement quote from a customer"
+      ],
+      "position": 32
+    },
+    {
+      "component_name": "Breadcrumb",
+      "category": "navigation",
+      "description": "Hierarchical page location trail.",
+      "import_path": "@/components/navigation/Breadcrumb.astro",
+      "file_path": "components/navigation/Breadcrumb.astro",
+      "props": [
+        {
+          "name": "items",
+          "type": "BreadcrumbItem[]",
+          "required": true,
+          "default": "",
+          "description": "Ordered list of breadcrumb items; last item is current page"
+        },
+        {
+          "name": "separator",
+          "type": "string",
+          "required": false,
+          "default": "\"/\"",
+          "description": "Separator character or symbol"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "back navigation",
+        "breadcrumb",
+        "breadcrumb navigation",
+        "hierarchical",
+        "items",
+        "location",
+        "location path",
+        "nav",
+        "nav trail",
+        "navigation",
+        "navigation breadcrumb",
+        "page",
+        "page path",
+        "separator",
+        "trail",
+        "wayfinding"
+      ],
+      "accessibility_notes": "aria-label=\"Breadcrumb\", aria-current=\"page\" on last item",
+      "usage_example": "---\nimport Breadcrumb from '@/components/navigation/Breadcrumb.astro';\n---\n\n<Breadcrumb\n  separator=\"/\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show the current page path to the user",
+        "breadcrumb navigation trail",
+        "where am I in the site hierarchy indicator",
+        "page location indicator",
+        "back navigation with path display",
+        "navigation breadcrumbs for deep pages",
+        "wayfinding for nested pages",
+        "page hierarchy path display"
+      ],
+      "position": 33
+    },
+    {
+      "component_name": "Pagination",
+      "category": "navigation",
+      "description": "Page number navigation for lists and data tables.",
+      "import_path": "@/components/navigation/Pagination.astro",
+      "file_path": "components/navigation/Pagination.astro",
+      "props": [
+        {
+          "name": "totalPages",
+          "type": "number",
+          "required": true,
+          "default": "",
+          "description": "Total number of pages"
+        },
+        {
+          "name": "currentPage",
+          "type": "number",
+          "required": true,
+          "default": "",
+          "description": "Currently active page (1-based)"
+        },
+        {
+          "name": "baseUrl",
+          "type": "string",
+          "required": false,
+          "default": "\"#\"",
+          "description": "Base URL — page number appended as ?page=N"
+        },
+        {
+          "name": "showEdges",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Show first/last page buttons"
+        },
+        {
+          "name": "siblingCount",
+          "type": "number",
+          "required": false,
+          "default": "1",
+          "description": "Number of page buttons visible around current page"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "base",
+        "count",
+        "current",
+        "data",
+        "data pagination",
+        "edges",
+        "infinite scroll alternative",
+        "list pagination",
+        "lists",
+        "nav",
+        "navigation",
+        "next page",
+        "number",
+        "page",
+        "page navigation",
+        "page numbers",
+        "pages",
+        "pagination",
+        "paging",
+        "previous page",
+        "result pages",
+        "show",
+        "sibling",
+        "tables",
+        "total",
+        "url"
+      ],
+      "accessibility_notes": "aria-label=\"Pagination\", aria-current=\"page\" on active page",
+      "usage_example": "---\nimport Pagination from '@/components/navigation/Pagination.astro';\n---\n\n<Pagination\n  totalPages={10}\n  currentPage={1}\n  baseUrl=\"#\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "paginate a long list of results",
+        "page number navigation for a data list",
+        "next and previous page buttons",
+        "how do I add pagination to a table",
+        "result pages for search results",
+        "navigate through pages of blog posts",
+        "page selector component",
+        "data pagination with current page indicator"
+      ],
+      "position": 34
+    },
+    {
+      "component_name": "Steps",
+      "category": "navigation",
+      "description": "Multi-step wizard / progress indicator showing current position in a flow.",
+      "import_path": "@/components/navigation/Steps.astro",
+      "file_path": "components/navigation/Steps.astro",
+      "props": [
+        {
+          "name": "steps",
+          "type": "Step[]",
+          "required": true,
+          "default": "",
+          "description": "Step definitions"
+        },
+        {
+          "name": "currentStep",
+          "type": "number",
+          "required": false,
+          "default": "0",
+          "description": "Currently active step index (0-based)"
+        },
+        {
+          "name": "orientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "required": false,
+          "default": "\"horizontal\"",
+          "description": "Orientation"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "checkout steps",
+        "current",
+        "flow",
+        "form wizard",
+        "indicator",
+        "multi",
+        "multi step",
+        "nav",
+        "navigation",
+        "onboarding steps",
+        "orientation",
+        "position",
+        "progress",
+        "progress steps",
+        "showing",
+        "step",
+        "step by step",
+        "step indicator",
+        "stepper",
+        "steps",
+        "wizard"
+      ],
+      "accessibility_notes": "aria-label, aria-current on active step",
+      "usage_example": "---\nimport Steps from '@/components/navigation/Steps.astro';\n---\n\n<Steps\n  currentStep={0}\n  orientation=\"horizontal\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "multi-step form with a progress indicator",
+        "wizard with step-by-step navigation",
+        "checkout steps component",
+        "onboarding flow with numbered steps",
+        "step indicator for a multi-page form",
+        "stepper for a multi-step workflow",
+        "numbered steps showing progress through a process",
+        "form wizard with next and back navigation"
+      ],
+      "position": 35
+    },
+    {
+      "component_name": "Tabs",
+      "category": "navigation",
+      "description": "Horizontal tab navigation for switching between content panels.",
+      "import_path": "@/components/navigation/Tabs.astro",
+      "file_path": "components/navigation/Tabs.astro",
+      "props": [
+        {
+          "name": "tabs",
+          "type": "Tab[]",
+          "required": true,
+          "default": "",
+          "description": "Tab definitions"
+        },
+        {
+          "name": "activeTab",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Currently active tab id"
+        },
+        {
+          "name": "variant",
+          "type": "\"line\" | \"pills\" | \"boxed\"",
+          "required": false,
+          "default": "\"line\"",
+          "description": "Visual style variant"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": ""
+        }
+      ],
+      "tags": [
+        "active",
+        "between",
+        "content",
+        "content tabs",
+        "horizontal",
+        "horizontal tabs",
+        "nav",
+        "navigation",
+        "panels",
+        "switch tabs",
+        "switching",
+        "tab",
+        "tab bar",
+        "tab list",
+        "tab navigation",
+        "tab panels",
+        "tabbed interface",
+        "tabs",
+        "variant"
+      ],
+      "accessibility_notes": "role=\"tablist\", role=\"tab\", role=\"tabpanel\", aria-selected, aria-controls",
+      "usage_example": "---\nimport Tabs from '@/components/navigation/Tabs.astro';\n---\n\n<Tabs\n\n  activeTab=\"example\"\n  variant=\"line\"\n>\n\n  Tabs content\n</Tabs>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "tab navigation to switch between content panels",
+        "tabbed interface with multiple sections",
+        "horizontal tabs for different views",
+        "switch content with clickable tab buttons",
+        "tab bar with associated panel content",
+        "how do I create tabs in astro",
+        "profile page with overview posts and settings tabs",
+        "settings page with multiple tab sections",
+        "tabbed content switcher"
+      ],
+      "position": 36
+    },
+    {
+      "component_name": "Avatar",
+      "category": "ui",
+      "description": "User profile picture with image and initials fallback.",
+      "import_path": "@/components/ui/Avatar.astro",
+      "file_path": "components/ui/Avatar.astro",
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Image URL"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Fallback alt text and initials source"
+        },
+        {
+          "name": "size",
+          "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Size preset"
+        },
+        {
+          "name": "shape",
+          "type": "\"circle\" | \"square\"",
+          "required": false,
+          "default": "\"circle\"",
+          "description": "Shape: circle or square with rounded corners"
+        },
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Border ring"
+        },
+        {
+          "name": "status",
+          "type": "\"online\" | \"offline\" | \"busy\" | \"away\"",
+          "required": false,
+          "default": "",
+          "description": "Online presence indicator"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "avatar",
+        "bordered",
+        "fallback",
+        "image",
+        "initials",
+        "interactive",
+        "member photo",
+        "name",
+        "picture",
+        "profile",
+        "profile avatar",
+        "profile image",
+        "profile picture",
+        "shape",
+        "size",
+        "src",
+        "status",
+        "ui",
+        "ui component",
+        "user",
+        "user avatar",
+        "user icon",
+        "user image",
+        "user photo"
+      ],
+      "accessibility_notes": "alt text on image, aria-label on fallback",
+      "usage_example": "---\nimport Avatar from '@/components/ui/Avatar.astro';\n---\n\n<Avatar\n  src=\"https://example.com/image.jpg\"\n  name=\"field-name\"\n  size=\"md\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show a user profile picture",
+        "circular user avatar image",
+        "user initials when no photo is available",
+        "profile picture component with fallback",
+        "member photo in a comment or list",
+        "avatar with initials fallback",
+        "user icon in a navbar or card",
+        "team member photo thumbnail"
+      ],
+      "position": 37
+    },
+    {
+      "component_name": "Badge",
+      "category": "ui",
+      "description": "Small inline status or label indicator.",
+      "import_path": "@/components/ui/Badge.astro",
+      "file_path": "components/ui/Badge.astro",
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"default\" | \"primary\" | \"success\" | \"warning\" | \"danger\" | \"info\"",
+          "required": false,
+          "default": "\"default\"",
+          "description": "Color / semantic meaning"
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Size"
+        },
+        {
+          "name": "pill",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Pill (fully rounded) vs. slightly rounded"
+        },
+        {
+          "name": "dot",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Show a colored dot before the text"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "Badge text content"
+        }
+      ],
+      "tags": [
+        "badge",
+        "category tag",
+        "chip",
+        "count badge",
+        "dot",
+        "indicator",
+        "inline",
+        "interactive",
+        "label",
+        "notification badge",
+        "pill",
+        "size",
+        "small",
+        "status",
+        "status badge",
+        "status indicator",
+        "tag",
+        "ui",
+        "ui component",
+        "variant"
+      ],
+      "accessibility_notes": "",
+      "usage_example": "---\nimport Badge from '@/components/ui/Badge.astro';\n---\n\n<Badge\n\n  variant=\"default\"\n  size=\"md\"\n  pill={true}\n>\n\n  Badge content\n</Badge>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show a status badge on a card",
+        "colored label for a category",
+        "notification count badge",
+        "pill-shaped chip indicator",
+        "small label next to text",
+        "tag for displaying status or category",
+        "new or updated badge on an item",
+        "colored status chip"
+      ],
+      "position": 38
+    },
+    {
+      "component_name": "Button",
+      "category": "ui",
+      "description": "Versatile action button with multiple variants and sizes.",
+      "import_path": "@/components/ui/Button.astro",
+      "file_path": "components/ui/Button.astro",
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"primary\" | \"secondary\" | \"outline\" | \"ghost\" | \"danger\" | \"success\"",
+          "required": false,
+          "default": "\"primary\"",
+          "description": "Visual style variant"
+        },
+        {
+          "name": "size",
+          "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Size preset"
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Render as an anchor tag (pass href)"
+        },
+        {
+          "name": "type",
+          "type": "\"button\" | \"submit\" | \"reset\"",
+          "required": false,
+          "default": "\"button\"",
+          "description": "HTML button type"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disabled state"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Show loading spinner and block interaction"
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Make button full width"
+        },
+        {
+          "name": "iconLeft",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Icon displayed before the label"
+        },
+        {
+          "name": "iconRight",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Icon displayed after the label"
+        },
+        {
+          "name": "pill",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Rounded pill shape"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "Button label text or content"
+        }
+      ],
+      "tags": [
+        "action",
+        "action button",
+        "button",
+        "call to action",
+        "click",
+        "clickable",
+        "cta",
+        "danger button",
+        "disabled",
+        "form submit",
+        "full",
+        "ghost button",
+        "href",
+        "icon",
+        "interactive",
+        "interactive button",
+        "left",
+        "link button",
+        "loading",
+        "multiple",
+        "outline button",
+        "pill",
+        "primary button",
+        "right",
+        "save changes",
+        "secondary button",
+        "size",
+        "sizes",
+        "submit button",
+        "submit form",
+        "type",
+        "ui",
+        "ui component",
+        "variant",
+        "variants",
+        "versatile",
+        "width"
+      ],
+      "accessibility_notes": "role=\"button\", keyboard focusable, aria-disabled support",
+      "usage_example": "---\nimport Button from '@/components/ui/Button.astro';\n---\n\n<Button\n\n  variant=\"primary\"\n  size=\"md\"\n  href=\"#\"\n>\n\n  Button content\n</Button>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "add a clickable button to my page",
+        "submit button for a form",
+        "call to action button",
+        "primary and secondary button variants",
+        "danger button for delete actions",
+        "button with loading state while submitting",
+        "ghost button with outline style",
+        "link-style button for navigation",
+        "disabled button state",
+        "how do I make a button component"
+      ],
+      "position": 39
+    },
+    {
+      "component_name": "Divider",
+      "category": "ui",
+      "description": "Horizontal or vertical separator line, optionally with label text.",
+      "import_path": "@/components/ui/Divider.astro",
+      "file_path": "components/ui/Divider.astro",
+      "props": [
+        {
+          "name": "orientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "required": false,
+          "default": "\"horizontal\"",
+          "description": "Layout direction"
+        },
+        {
+          "name": "labelPosition",
+          "type": "\"left\" | \"center\" | \"right\"",
+          "required": false,
+          "default": "\"center\"",
+          "description": "Label position for horizontal dividers"
+        },
+        {
+          "name": "style",
+          "type": "\"solid\" | \"dashed\" | \"dotted\"",
+          "required": false,
+          "default": "\"solid\"",
+          "description": "Line style"
+        },
+        {
+          "name": "color",
+          "type": "\"default\" | \"muted\" | \"strong\"",
+          "required": false,
+          "default": "\"default\"",
+          "description": "Color"
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "default": "\"auto\"",
+          "description": "Height for vertical dividers (CSS value)"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "Optional center label"
+        }
+      ],
+      "tags": [
+        "color",
+        "content divider",
+        "divider",
+        "height",
+        "horizontal",
+        "horizontal rule",
+        "hr",
+        "interactive",
+        "label",
+        "line",
+        "line divider",
+        "optionally",
+        "orientation",
+        "position",
+        "section separator",
+        "separator",
+        "text",
+        "ui",
+        "ui component",
+        "vertical",
+        "visual divider"
+      ],
+      "accessibility_notes": "role=\"separator\", aria-orientation",
+      "usage_example": "---\nimport Divider from '@/components/ui/Divider.astro';\n---\n\n<Divider\n\n  orientation=\"horizontal\"\n  labelPosition=\"center\"\n  color=\"default\"\n>\n\n  Divider content\n</Divider>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "add a horizontal line between sections",
+        "visual separator between content blocks",
+        "divider with custom styling",
+        "line to separate two sections",
+        "section separator",
+        "content divider between elements"
+      ],
+      "position": 40
+    },
+    {
+      "component_name": "Spinner",
+      "category": "ui",
+      "description": "Animated circular loading indicator.",
+      "import_path": "@/components/ui/Spinner.astro",
+      "file_path": "components/ui/Spinner.astro",
+      "props": [
+        {
+          "name": "size",
+          "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+          "required": false,
+          "default": "\"md\"",
+          "description": "Size preset"
+        },
+        {
+          "name": "variant",
+          "type": "\"primary\" | \"secondary\" | \"white\" | \"success\" | \"danger\"",
+          "required": false,
+          "default": "\"primary\"",
+          "description": "Color variant"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "\"Loading...\"",
+          "description": "Visible label for screen readers"
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Display the label text visually next to the spinner"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "required": false,
+          "default": "\"\"",
+          "description": "Additional CSS classes"
+        }
+      ],
+      "slots": [],
+      "tags": [
+        "animated",
+        "busy indicator",
+        "circular",
+        "circular loader",
+        "indicator",
+        "interactive",
+        "label",
+        "loader",
+        "loading",
+        "loading animation",
+        "loading indicator",
+        "loading spinner",
+        "loading state",
+        "processing indicator",
+        "progress spinner",
+        "show",
+        "size",
+        "spinner",
+        "ui",
+        "ui component",
+        "variant"
+      ],
+      "accessibility_notes": "aria-label, role=\"status\" for screen readers",
+      "usage_example": "---\nimport Spinner from '@/components/ui/Spinner.astro';\n---\n\n<Spinner\n  size=\"md\"\n  variant=\"primary\"\n  label=\"Loading...\"\n/>",
+      "confidence": 1.0,
+      "synthetic_queries": [
+        "show a loading spinner while data loads",
+        "loading indicator for async operations",
+        "circular animation while fetching data",
+        "page loading state indicator",
+        "busy indicator for a form submission",
+        "how do I show a loading state",
+        "spinner while waiting for a response",
+        "animated loading icon"
+      ],
+      "position": 41
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────
+   DESIGN TOKENS
+   Semantic color tokens only. All structural values
+   (spacing, layout, sizing) live in Tailwind utilities.
+   ───────────────────────────────────────────────────────── */
+
+:root {
+  /* Surfaces */
+  --bg-base:       #F8F7F4;
+  --bg-surface:    #FFFFFF;
+  --bg-subtle:     #F1F0EC;
+
+  /* Borders */
+  --border:        #E2E0D8;
+  --border-strong: #C8C5BC;
+
+  /* Typography */
+  --text-primary:  #0F0E0C;
+  --text-secondary:#4A4843;
+  --text-muted:    #9B9792;
+
+  /* Accent palette */
+  --accent:        #1A1A2E;   /* deep navy — used for CTAs in light */
+  --accent-2:      #7C3AED;   /* electric violet */
+  --accent-fg:     #FFFFFF;   /* foreground on accent */
+  --accent-glow:   #A78BFA;   /* lighter violet for gradients */
+  --accent-subtle: #EDE9FE;   /* tinted surface */
+
+  /* Status */
+  --success:       #10B981;
+  --warning:       #F59E0B;
+  --error:         #EF4444;
+
+  /* Hero blobs — light */
+  --blob-1: rgba(200, 185, 255, 0.55);
+  --blob-2: rgba(167, 139, 250, 0.35);
+  --blob-3: rgba(253, 230, 210, 0.45);
+
+  /* Fonts */
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+
+html.dark {
+  /* Surfaces */
+  --bg-base:       #0A0A0F;
+  --bg-surface:    #111118;
+  --bg-subtle:     #1A1A24;
+
+  /* Borders */
+  --border:        #2A2A38;
+  --border-strong: #3D3D50;
+
+  /* Typography */
+  --text-primary:  #F0EFF8;
+  --text-secondary:#A9A8B8;
+  --text-muted:    #6B6A7A;
+
+  /* Accent palette */
+  --accent:        #7C3AED;
+  --accent-2:      #A78BFA;
+  --accent-fg:     #FFFFFF;
+  --accent-glow:   rgba(124, 58, 237, 0.28);
+  --accent-subtle: rgba(124, 58, 237, 0.12);
+
+  /* Hero blobs — dark */
+  --blob-1: rgba(124, 58, 237, 0.22);
+  --blob-2: rgba(79, 70, 229, 0.18);
+  --blob-3: rgba(167, 139, 250, 0.12);
+}
+
+/* ─────────────────────────────────────────────────────────
+   BASE LAYER — resets + typography defaults
+   ───────────────────────────────────────────────────────── */
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color: var(--text-primary);
+    background-color: var(--bg-base);
+    /* Smooth color token transitions on theme switch */
+    transition:
+      background-color 300ms ease,
+      color 300ms ease;
+  }
+
+  /* Headings use display font with tight tracking */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  code, pre, kbd {
+    font-family: var(--font-mono);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: var(--accent-subtle);
+    color: var(--text-primary);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar        { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  { background: var(--border-strong); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+  /* Focus — offset 3px (not 2px) */
+  :focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   COMPONENT LAYER — reusable compositional classes
+   ───────────────────────────────────────────────────────── */
+
+@layer components {
+  /* Display type — used on headlines, never body */
+  .font-display { font-family: var(--font-display); }
+
+  /* Gradient text — used ONCE, on the hero headline only */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--accent-2)  0%,
+      var(--accent-glow) 60%,
+      #C4B5FD          100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glass button — hero CTAs */
+  .btn-glass {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #F0EFF8;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+    transition: background 150ms ease-out, border-color 150ms ease-out, transform 150ms ease-out;
+    text-decoration: none;
+  }
+  .btn-glass:hover {
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.26);
+    transform: translateY(-1px);
+  }
+  .btn-glass:active { transform: translateY(0); }
+
+  /* Solid button — light mode CTAs / dark accent */
+  .btn-solid {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    background: var(--accent);
+    color: var(--accent-fg);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    text-decoration: none;
+  }
+  .btn-solid:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: border-color 150ms ease-out, color 150ms ease-out, transform 150ms ease-out;
+    text-decoration: none;
+  }
+  .btn-ghost:hover {
+    border-color: var(--border-strong);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+  }
+
+  /* Section container */
+  .section-container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Monospace inline */
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   UTILITIES — one-off helpers
+   ───────────────────────────────────────────────────────── */
+
+@layer utilities {
+  /* Hero gradient blobs */
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(72px);
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  /* Stagger animation delay helpers */
+  .delay-75  { animation-delay: 75ms; }
+  .delay-150 { animation-delay: 150ms; }
+  .delay-225 { animation-delay: 225ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
+  .delay-800 { animation-delay: 800ms; }
+}
