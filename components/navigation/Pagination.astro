@@ -1,0 +1,110 @@
+---
+/**
+ * Pagination - Page number navigation for lists and data tables.
+ *
+ * @component Pagination
+ * @category navigation
+ * @accessibility aria-label="Pagination", aria-current="page" on active page
+ */
+
+export interface Props {
+  /** Total number of pages */
+  totalPages: number;
+  /** Currently active page (1-based) */
+  currentPage: number;
+  /** Base URL — page number appended as ?page=N */
+  baseUrl?: string;
+  /** Show first/last page buttons */
+  showEdges?: boolean;
+  /** Number of page buttons visible around current page */
+  siblingCount?: number;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  totalPages,
+  currentPage,
+  baseUrl = "#",
+  showEdges = true,
+  siblingCount = 1,
+  class: className = "",
+} = Astro.props;
+
+function pageUrl(page: number): string {
+  const url = new URL(baseUrl, "http://x");
+  url.searchParams.set("page", String(page));
+  return `${url.pathname}${url.search}`;
+}
+
+// Build visible page range
+const start = Math.max(1, currentPage - siblingCount);
+const end = Math.min(totalPages, currentPage + siblingCount);
+const pages: (number | "ellipsis")[] = [];
+if (showEdges && start > 2) { pages.push(1); if (start > 3) pages.push("ellipsis"); }
+else if (showEdges && start === 2) pages.push(1);
+for (let i = start; i <= end; i++) pages.push(i);
+if (showEdges && end < totalPages - 1) { pages.push("ellipsis"); pages.push(totalPages); }
+else if (showEdges && end === totalPages - 1) pages.push(totalPages);
+
+const btnBase = "inline-flex items-center justify-center h-8 w-8 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1";
+---
+
+<nav aria-label="Pagination" class:list={["flex items-center gap-1", className]}>
+  <!-- Previous -->
+  <a
+    href={currentPage > 1 ? pageUrl(currentPage - 1) : undefined}
+    aria-label="Previous page"
+    aria-disabled={currentPage === 1 ? "true" : undefined}
+    class:list={[
+      btnBase,
+      currentPage === 1
+        ? "text-gray-300 cursor-not-allowed pointer-events-none"
+        : "text-gray-600 hover:bg-gray-100",
+    ]}
+  >
+    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </a>
+
+  <!-- Page numbers -->
+  {pages.map((page) =>
+    page === "ellipsis" ? (
+      <span class="inline-flex items-center justify-center h-8 w-8 text-gray-400 text-sm select-none">
+        &hellip;
+      </span>
+    ) : (
+      <a
+        href={pageUrl(page)}
+        aria-label={`Page ${page}`}
+        aria-current={page === currentPage ? "page" : undefined}
+        class:list={[
+          btnBase,
+          page === currentPage
+            ? "bg-blue-600 text-white pointer-events-none"
+            : "text-gray-700 hover:bg-gray-100",
+        ]}
+      >
+        {page}
+      </a>
+    )
+  )}
+
+  <!-- Next -->
+  <a
+    href={currentPage < totalPages ? pageUrl(currentPage + 1) : undefined}
+    aria-label="Next page"
+    aria-disabled={currentPage === totalPages ? "true" : undefined}
+    class:list={[
+      btnBase,
+      currentPage === totalPages
+        ? "text-gray-300 cursor-not-allowed pointer-events-none"
+        : "text-gray-600 hover:bg-gray-100",
+    ]}
+  >
+    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+</nav>

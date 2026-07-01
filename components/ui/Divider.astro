@@ -1,0 +1,80 @@
+---
+/**
+ * Divider - Horizontal or vertical separator line, optionally with label text.
+ *
+ * @component Divider
+ * @category ui
+ * @accessibility role="separator", aria-orientation
+ * @slot default - Optional center label
+ */
+
+export interface Props {
+  /** Layout direction */
+  orientation?: "horizontal" | "vertical";
+  /** Label position for horizontal dividers */
+  labelPosition?: "left" | "center" | "right";
+  /** Line style */
+  style?: "solid" | "dashed" | "dotted";
+  /** Color */
+  color?: "default" | "muted" | "strong";
+  /** Height for vertical dividers (CSS value) */
+  height?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  orientation = "horizontal",
+  labelPosition = "center",
+  style: lineStyle = "solid",
+  color = "default",
+  height = "auto",
+  class: className = "",
+} = Astro.props;
+
+const colorMap: Record<string, string> = {
+  default: "border-gray-200",
+  muted: "border-gray-100",
+  strong: "border-gray-400",
+};
+
+const labelPosMap: Record<string, string> = {
+  left: "justify-start",
+  center: "justify-center",
+  right: "justify-end",
+};
+---
+
+{orientation === "horizontal" ? (
+  <div
+    role="separator"
+    aria-orientation="horizontal"
+    class:list={["flex items-center gap-3 w-full my-4", className]}
+  >
+    <hr class:list={[
+      "flex-1 border-0 border-t",
+      colorMap[color],
+      lineStyle === "dashed" ? "border-dashed" : lineStyle === "dotted" ? "border-dotted" : "border-solid",
+    ]} />
+    <slot>
+      <!-- no label by default -->
+    </slot>
+    <hr class:list={[
+      "flex-1 border-0 border-t",
+      colorMap[color],
+      lineStyle === "dashed" ? "border-dashed" : lineStyle === "dotted" ? "border-dotted" : "border-solid",
+    ]} />
+  </div>
+) : (
+  <div
+    role="separator"
+    aria-orientation="vertical"
+    style={`height: ${height};`}
+    class:list={[
+      "inline-block border-l self-stretch mx-3",
+      colorMap[color],
+      lineStyle === "dashed" ? "border-dashed" : lineStyle === "dotted" ? "border-dotted" : "border-solid",
+      className,
+    ]}
+  />
+)}

@@ -1,0 +1,72 @@
+---
+/**
+ * Badge - Small inline status or label indicator.
+ *
+ * @component Badge
+ * @category ui
+ * @slot default - Badge text content
+ */
+
+export interface Props {
+  /** Color / semantic meaning */
+  variant?: "default" | "primary" | "success" | "warning" | "danger" | "info";
+  /** Size */
+  size?: "sm" | "md" | "lg";
+  /** Pill (fully rounded) vs. slightly rounded */
+  pill?: boolean;
+  /** Show a colored dot before the text */
+  dot?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  variant = "default",
+  size = "md",
+  pill = true,
+  dot = false,
+  class: className = "",
+} = Astro.props;
+
+const variantMap: Record<string, string> = {
+  default: "bg-gray-100 text-gray-700",
+  primary: "bg-blue-100 text-blue-700",
+  success: "bg-green-100 text-green-700",
+  warning: "bg-yellow-100 text-yellow-700",
+  danger: "bg-red-100 text-red-700",
+  info: "bg-sky-100 text-sky-700",
+};
+
+const dotColorMap: Record<string, string> = {
+  default: "bg-gray-500",
+  primary: "bg-blue-500",
+  success: "bg-green-500",
+  warning: "bg-yellow-500",
+  danger: "bg-red-500",
+  info: "bg-sky-500",
+};
+
+const sizeMap: Record<string, string> = {
+  sm: "text-xs px-2 py-0.5 gap-1",
+  md: "text-xs px-2.5 py-1 gap-1.5",
+  lg: "text-sm px-3 py-1 gap-1.5",
+};
+---
+
+<span
+  class:list={[
+    "inline-flex items-center font-medium",
+    pill ? "rounded-full" : "rounded",
+    variantMap[variant],
+    sizeMap[size],
+    className,
+  ]}
+>
+  {dot && (
+    <span
+      class:list={["h-1.5 w-1.5 rounded-full flex-shrink-0", dotColorMap[variant]]}
+      aria-hidden="true"
+    />
+  )}
+  <slot />
+</span>

@@ -1,0 +1,95 @@
+---
+/**
+ * Avatar - User profile picture with image and initials fallback.
+ *
+ * @component Avatar
+ * @category ui
+ * @accessibility alt text on image, aria-label on fallback
+ */
+
+export interface Props {
+  /** Image URL */
+  src?: string;
+  /** Fallback alt text and initials source */
+  name?: string;
+  /** Size preset */
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
+  /** Shape: circle or square with rounded corners */
+  shape?: "circle" | "square";
+  /** Border ring */
+  bordered?: boolean;
+  /** Online presence indicator */
+  status?: "online" | "offline" | "busy" | "away";
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  src,
+  name = "",
+  size = "md",
+  shape = "circle",
+  bordered = false,
+  status,
+  class: className = "",
+} = Astro.props;
+
+const initials = name
+  .split(" ")
+  .slice(0, 2)
+  .map((n) => n[0]?.toUpperCase() ?? "")
+  .join("");
+
+const sizeMap: Record<string, string> = {
+  xs: "h-6 w-6 text-xs",
+  sm: "h-8 w-8 text-sm",
+  md: "h-10 w-10 text-sm",
+  lg: "h-12 w-12 text-base",
+  xl: "h-16 w-16 text-lg",
+  "2xl": "h-20 w-20 text-xl",
+};
+
+const statusColorMap: Record<string, string> = {
+  online: "bg-green-400",
+  offline: "bg-gray-400",
+  busy: "bg-red-400",
+  away: "bg-yellow-400",
+};
+---
+
+<div class:list={["relative inline-flex flex-shrink-0", className]}>
+  {src ? (
+    <img
+      src={src}
+      alt={name || "User avatar"}
+      class:list={[
+        "object-cover",
+        sizeMap[size],
+        shape === "circle" ? "rounded-full" : "rounded-lg",
+        bordered ? "ring-2 ring-white ring-offset-1" : "",
+      ]}
+    />
+  ) : (
+    <span
+      aria-label={name ? `${name} avatar` : "User avatar"}
+      class:list={[
+        "inline-flex items-center justify-center font-semibold bg-blue-100 text-blue-700 select-none",
+        sizeMap[size],
+        shape === "circle" ? "rounded-full" : "rounded-lg",
+        bordered ? "ring-2 ring-white ring-offset-1" : "",
+      ]}
+    >
+      {initials || "?"}
+    </span>
+  )}
+
+  {status && (
+    <span
+      aria-label={`Status: ${status}`}
+      class:list={[
+        "absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white",
+        statusColorMap[status],
+      ]}
+    />
+  )}
+</div>

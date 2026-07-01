@@ -1,0 +1,75 @@
+# ============================================================
+# RAG System Configuration
+# All runtime values live here — no hardcoded values in code.
+# ============================================================
+
+# ── Scanner ──────────────────────────────────────────────────
+scanner:
+  components_dir: "components"          # Relative to project root
+  supported_extensions:
+    - ".astro"
+  ignored_dirs:
+    - "node_modules"
+    - "dist"
+    - "build"
+    - ".git"
+    - ".svelte-kit"
+    - "__pycache__"
+    - ".cache"
+  ignored_prefixes:
+    - "."
+    - "_"
+  output_file: "data/component_inventory.json"
+
+# ── Metadata ─────────────────────────────────────────────────
+metadata:
+  input_file: "data/component_inventory.json"
+  output_file: "data/metadata.json"
+  queries_output_file: "data/metadata_with_queries.json"
+  min_queries_per_component: 5
+  max_queries_per_component: 10
+  confidence_threshold: 0.6             # Below this → flagged for manual review
+
+# ── Embedding ────────────────────────────────────────────────
+embedding:
+  model_name: "all-MiniLM-L6-v2"
+  model_cache_dir: "data/models"
+  batch_size: 32
+  normalize_embeddings: true
+  output_dir: "data/embeddings"
+  embeddings_file: "data/embeddings/embeddings.npy"
+  ids_file: "data/embeddings/component_ids.json"
+
+# ── Vector Store ─────────────────────────────────────────────
+vector_store:
+  index_type: "FlatIP"                  # Inner product (cosine after L2 norm)
+  index_dir: "data/faiss_index"
+  index_file: "data/faiss_index/index.faiss"
+  metadata_file: "data/faiss_index/metadata_store.json"
+  dimension: 384                        # all-MiniLM-L6-v2 output dimension
+
+# ── Retriever ────────────────────────────────────────────────
+retriever:
+  top_k: 5
+  score_threshold: 0.25                 # Minimum cosine similarity to return
+  rerank: false                         # Enable cross-encoder re-ranking (future)
+
+# ── Generator ────────────────────────────────────────────────
+generator:
+  provider: "groq"
+  model: "llama-3.3-70b-versatile"
+  temperature: 0.1
+  max_tokens: 1024
+  no_result_message: "No matching component found in the library for this query."
+
+# ── Evaluation ───────────────────────────────────────────────
+evaluation:
+  dataset_file: "evaluation/eval_dataset.json"
+  results_file: "evaluation/results.json"
+  top_k_precision: 3
+
+# ── Logging ──────────────────────────────────────────────────
+logging:
+  level: "INFO"
+  format: "%(asctime)s [%(levelname)s] %(name)s — %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"

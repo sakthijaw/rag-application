@@ -1,0 +1,93 @@
+---
+/**
+ * PricingCard - Pricing tier card showing plan name, price, features, and CTA.
+ *
+ * @component PricingCard
+ * @category marketing
+ * @slot features - List of included feature items
+ * @slot cta      - Call-to-action button
+ */
+
+export interface Props {
+  /** Plan name (e.g., Starter, Pro, Enterprise) */
+  name: string;
+  /** Price string (e.g., "$29") */
+  price: string;
+  /** Billing period (e.g., "/ month") */
+  period?: string;
+  /** Short plan description */
+  description?: string;
+  /** Highlight this as the recommended / featured plan */
+  featured?: boolean;
+  /** Badge text for featured plans */
+  badge?: string;
+}
+
+const {
+  name,
+  price,
+  period = "/ month",
+  description,
+  featured = false,
+  badge = "Most Popular",
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "relative flex flex-col rounded-2xl p-8 h-full",
+    featured
+      ? "bg-blue-600 text-white shadow-2xl ring-2 ring-blue-600 scale-105"
+      : "bg-white text-gray-900 border border-gray-200 shadow-sm",
+  ]}
+>
+  {featured && badge && (
+    <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+      <span class="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+        {badge}
+      </span>
+    </div>
+  )}
+
+  <!-- Plan header -->
+  <div class="mb-6">
+    <h3 class:list={["text-lg font-bold", featured ? "text-white" : "text-gray-900"]}>
+      {name}
+    </h3>
+    {description && (
+      <p class:list={["mt-1 text-sm", featured ? "text-blue-100" : "text-gray-500"]}>
+        {description}
+      </p>
+    )}
+  </div>
+
+  <!-- Price -->
+  <div class="mb-8 flex items-end gap-1">
+    <span class:list={["text-5xl font-extrabold tracking-tight", featured ? "text-white" : "text-gray-900"]}>
+      {price}
+    </span>
+    <span class:list={["text-sm mb-2", featured ? "text-blue-200" : "text-gray-500"]}>
+      {period}
+    </span>
+  </div>
+
+  <!-- Feature list -->
+  <ul class="flex-1 space-y-3 mb-8" role="list">
+    <slot name="features" />
+  </ul>
+
+  <!-- CTA -->
+  <slot name="cta">
+    <button
+      type="button"
+      class:list={[
+        "w-full rounded-xl py-3 px-4 text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
+        featured
+          ? "bg-white text-blue-600 hover:bg-blue-50 focus:ring-white"
+          : "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
+      ]}
+    >
+      Get started
+    </button>
+  </slot>
+</div>

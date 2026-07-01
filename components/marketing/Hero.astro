@@ -1,0 +1,124 @@
+---
+/**
+ * Hero - Full-width landing page hero section with headline, subtext, and CTA buttons.
+ *
+ * @component Hero
+ * @category marketing
+ * @slot eyebrow  - Small label/badge above the headline
+ * @slot headline - Main H1 headline (overrides title prop)
+ * @slot subtext  - Supporting description paragraph
+ * @slot actions  - Primary and secondary CTA buttons
+ * @slot media    - Right-side image or illustration (two-column layout)
+ */
+
+export interface Props {
+  /** Main headline text */
+  title?: string;
+  /** Supporting paragraph */
+  subtitle?: string;
+  /** Layout: centered (full-width) or split (text + media) */
+  layout?: "centered" | "split";
+  /** Background style */
+  background?: "white" | "light" | "gradient" | "dark";
+  /** Top padding size */
+  size?: "sm" | "md" | "lg" | "xl";
+}
+
+const {
+  title,
+  subtitle,
+  layout = "centered",
+  background = "white",
+  size = "lg",
+} = Astro.props;
+
+const bgMap: Record<string, string> = {
+  white: "bg-white",
+  light: "bg-gray-50",
+  gradient: "bg-gradient-to-br from-blue-50 via-white to-indigo-50",
+  dark: "bg-gray-900 text-white",
+};
+
+const paddingMap: Record<string, string> = {
+  sm: "py-12 sm:py-16",
+  md: "py-16 sm:py-24",
+  lg: "py-20 sm:py-32",
+  xl: "py-28 sm:py-40",
+};
+---
+
+<section
+  class:list={[
+    "w-full",
+    bgMap[background],
+    paddingMap[size],
+  ]}
+  aria-label="Hero section"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {layout === "centered" ? (
+      <div class="text-center max-w-3xl mx-auto">
+        <div class="mb-4">
+          <slot name="eyebrow" />
+        </div>
+
+        <slot name="headline">
+          {title && (
+            <h1 class:list={[
+              "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight",
+              background === "dark" ? "text-white" : "text-gray-900",
+            ]}>
+              {title}
+            </h1>
+          )}
+        </slot>
+
+        {subtitle && (
+          <p class:list={[
+            "mt-6 text-lg sm:text-xl leading-8 max-w-2xl mx-auto",
+            background === "dark" ? "text-gray-300" : "text-gray-600",
+          ]}>
+            {subtitle}
+          </p>
+        )}
+
+        <slot name="subtext" />
+
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <slot name="actions" />
+        </div>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <slot name="eyebrow" />
+          <slot name="headline">
+            {title && (
+              <h1 class:list={[
+                "mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight",
+                background === "dark" ? "text-white" : "text-gray-900",
+              ]}>
+                {title}
+              </h1>
+            )}
+          </slot>
+          {subtitle && (
+            <p class:list={[
+              "mt-6 text-lg leading-8",
+              background === "dark" ? "text-gray-300" : "text-gray-600",
+            ]}>
+              {subtitle}
+            </p>
+          )}
+          <slot name="subtext" />
+          <div class="mt-8 flex flex-wrap gap-4">
+            <slot name="actions" />
+          </div>
+        </div>
+        <div class="flex items-center justify-center">
+          <slot name="media" />
+        </div>
+      </div>
+    )}
+  </div>
+</section>

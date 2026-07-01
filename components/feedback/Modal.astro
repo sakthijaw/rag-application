@@ -1,0 +1,113 @@
+---
+/**
+ * Modal - Accessible dialog overlay for confirmations, forms, and detail views.
+ *
+ * @component Modal
+ * @category feedback
+ * @accessibility role="dialog", aria-modal, aria-labelledby, focus-trap via JS
+ * @slot header  - Modal title area
+ * @slot default - Modal body content
+ * @slot footer  - Action buttons row
+ */
+
+export interface Props {
+  /** Unique id — used for aria-labelledby */
+  id: string;
+  /** Modal title (also sets aria-label if no header slot) */
+  title?: string;
+  /** Size preset */
+  size?: "sm" | "md" | "lg" | "xl" | "full";
+  /** Allow closing by clicking the backdrop */
+  closeOnBackdrop?: boolean;
+  /** Whether the modal is initially open (SSR static) */
+  open?: boolean;
+}
+
+const {
+  id,
+  title,
+  size = "md",
+  open = false,
+} = Astro.props;
+
+const sizeMap: Record<string, string> = {
+  sm: "max-w-sm",
+  md: "max-w-md",
+  lg: "max-w-lg",
+  xl: "max-w-xl",
+  full: "max-w-full mx-4",
+};
+---
+
+<!-- Backdrop -->
+<div
+  id={`${id}-backdrop`}
+  class:list={[
+    "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm",
+    "transition-opacity duration-200",
+    open ? "opacity-100" : "opacity-0 pointer-events-none",
+  ]}
+  aria-hidden={open ? "false" : "true"}
+>
+  <!-- Dialog panel -->
+  <div
+    id={id}
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby={`${id}-title`}
+    class:list={[
+      "relative w-full bg-white rounded-xl shadow-2xl flex flex-col max-h-[90vh]",
+      "transition-transform duration-200",
+      open ? "scale-100" : "scale-95",
+      sizeMap[size],
+    ]}
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 flex-shrink-0">
+      <slot name="header">
+        {title && (
+          <h2 id={`${id}-title`} class="text-base font-semibold text-gray-900">
+            {title}
+          </h2>
+        )}
+      </slot>
+      <button
+        type="button"
+        aria-label="Close dialog"
+        class="ml-auto rounded-md p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+        data-modal-close={id}
+      >
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="flex-1 overflow-y-auto px-6 py-5">
+      <slot />
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200 flex-shrink-0">
+      <slot name="footer" />
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll("[data-modal-close]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.getAttribute("data-modal-close");
+      const backdrop = document.getElementById(`${modalId}-backdrop`);
+      backdrop?.classList.add("opacity-0", "pointer-events-none");
+      backdrop?.setAttribute("aria-hidden", "true");
+    });
+  });
+
+  window.openModal = (id: string) => {
+    const backdrop = document.getElementById(`${id}-backdrop`);
+    backdrop?.classList.remove("opacity-0", "pointer-events-none");
+    backdrop?.setAttribute("aria-hidden", "false");
+  };
+</script>

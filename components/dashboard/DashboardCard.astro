@@ -1,0 +1,70 @@
+---
+/**
+ * DashboardCard - Versatile metric/widget card for admin and analytics dashboards.
+ *
+ * @component DashboardCard
+ * @category dashboard
+ * @slot header  - Custom card header (title + actions row)
+ * @slot default - Card body content (charts, tables, stats)
+ * @slot footer  - Card footer (links, last updated)
+ */
+
+export interface Props {
+  /** Card title */
+  title?: string;
+  /** Optional subtitle */
+  subtitle?: string;
+  /** Show a loading state */
+  loading?: boolean;
+  /** Remove default body padding */
+  noPadding?: boolean;
+  /** Header actions (e.g., export, filter buttons) */
+  showHeaderActions?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  loading = false,
+  noPadding = false,
+  class: className = "",
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col overflow-hidden",
+    className,
+  ]}
+  aria-busy={loading ? "true" : "false"}
+>
+  <!-- Header -->
+  {(title) && (
+    <div class="flex items-start justify-between px-5 py-4 border-b border-gray-100 flex-shrink-0">
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900">{title}</h3>
+        {subtitle && <p class="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
+      </div>
+      <slot name="header" />
+    </div>
+  )}
+
+  <!-- Body -->
+  <div class:list={["flex-1 relative", noPadding ? "" : "p-5"]}>
+    {loading ? (
+      <div class="absolute inset-0 flex items-center justify-center bg-white/80 z-10">
+        <span
+          class="block h-6 w-6 rounded-full border-2 border-blue-200 border-t-blue-600 animate-spin"
+          role="status"
+          aria-label="Loading"
+        />
+      </div>
+    ) : null}
+    <slot />
+  </div>
+
+  <!-- Footer -->
+  <slot name="footer" />
+</div>

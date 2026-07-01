@@ -1,0 +1,66 @@
+---
+/**
+ * Spinner - Animated circular loading indicator.
+ *
+ * @component Spinner
+ * @category ui
+ * @accessibility aria-label, role="status" for screen readers
+ */
+
+export interface Props {
+  /** Size preset */
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  /** Color variant */
+  variant?: "primary" | "secondary" | "white" | "success" | "danger";
+  /** Visible label for screen readers */
+  label?: string;
+  /** Display the label text visually next to the spinner */
+  showLabel?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  size = "md",
+  variant = "primary",
+  label = "Loading...",
+  showLabel = false,
+  class: className = "",
+} = Astro.props;
+
+const sizeMap: Record<string, string> = {
+  xs: "h-3 w-3 border-[1.5px]",
+  sm: "h-4 w-4 border-2",
+  md: "h-6 w-6 border-2",
+  lg: "h-8 w-8 border-[3px]",
+  xl: "h-12 w-12 border-4",
+};
+
+const colorMap: Record<string, string> = {
+  primary: "border-blue-200 border-t-blue-600",
+  secondary: "border-gray-200 border-t-gray-600",
+  white: "border-white/30 border-t-white",
+  success: "border-green-200 border-t-green-600",
+  danger: "border-red-200 border-t-red-600",
+};
+---
+
+<div
+  role="status"
+  aria-label={label}
+  class:list={["inline-flex items-center gap-2", className]}
+>
+  <span
+    class:list={[
+      "block rounded-full animate-spin flex-shrink-0",
+      sizeMap[size],
+      colorMap[variant],
+    ]}
+    aria-hidden="true"
+  />
+  {showLabel ? (
+    <span class="text-sm text-gray-600">{label}</span>
+  ) : (
+    <span class="sr-only">{label}</span>
+  )}
+</div>

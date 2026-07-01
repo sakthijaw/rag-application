@@ -1,0 +1,704 @@
+{
+  "total_components": 42,
+  "categories": [
+    "auth",
+    "content",
+    "dashboard",
+    "data",
+    "feedback",
+    "forms",
+    "layout",
+    "marketing",
+    "navigation",
+    "ui"
+  ],
+  "components": [
+    {
+      "component_name": "ForgotPassword",
+      "file_path": "components/auth/ForgotPassword.astro",
+      "absolute_path": "F:\\rag application\\components\\auth\\ForgotPassword.astro",
+      "extension": ".astro",
+      "category": "auth",
+      "folder": "components/auth",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 87,
+      "file_size_bytes": 3101
+    },
+    {
+      "component_name": "LoginForm",
+      "file_path": "components/auth/LoginForm.astro",
+      "absolute_path": "F:\\rag application\\components\\auth\\LoginForm.astro",
+      "extension": ".astro",
+      "category": "auth",
+      "folder": "components/auth",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 138,
+      "file_size_bytes": 4700
+    },
+    {
+      "component_name": "RegisterForm",
+      "file_path": "components/auth/RegisterForm.astro",
+      "absolute_path": "F:\\rag application\\components\\auth\\RegisterForm.astro",
+      "extension": ".astro",
+      "category": "auth",
+      "folder": "components/auth",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 128,
+      "file_size_bytes": 5623
+    },
+    {
+      "component_name": "Article",
+      "file_path": "components/content/Article.astro",
+      "absolute_path": "F:\\rag application\\components\\content\\Article.astro",
+      "extension": ".astro",
+      "category": "content",
+      "folder": "components/content",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 135,
+      "file_size_bytes": 3829
+    },
+    {
+      "component_name": "BlogCard",
+      "file_path": "components/content/BlogCard.astro",
+      "absolute_path": "F:\\rag application\\components\\content\\BlogCard.astro",
+      "extension": ".astro",
+      "category": "content",
+      "folder": "components/content",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 136,
+      "file_size_bytes": 3908
+    },
+    {
+      "component_name": "ProfileCard",
+      "file_path": "components/content/ProfileCard.astro",
+      "absolute_path": "F:\\rag application\\components\\content\\ProfileCard.astro",
+      "extension": ".astro",
+      "category": "content",
+      "folder": "components/content",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 122,
+      "file_size_bytes": 3885
+    },
+    {
+      "component_name": "ActivityFeed",
+      "file_path": "components/dashboard/ActivityFeed.astro",
+      "absolute_path": "F:\\rag application\\components\\dashboard\\ActivityFeed.astro",
+      "extension": ".astro",
+      "category": "dashboard",
+      "folder": "components/dashboard",
+      "exports": [
+        "ActivityItem",
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 110,
+      "file_size_bytes": 4066
+    },
+    {
+      "component_name": "DashboardCard",
+      "file_path": "components/dashboard/DashboardCard.astro",
+      "absolute_path": "F:\\rag application\\components\\dashboard\\DashboardCard.astro",
+      "extension": ".astro",
+      "category": "dashboard",
+      "folder": "components/dashboard",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 70,
+      "file_size_bytes": 1793
+    },
+    {
+      "component_name": "StatsGrid",
+      "file_path": "components/dashboard/StatsGrid.astro",
+      "absolute_path": "F:\\rag application\\components\\dashboard\\StatsGrid.astro",
+      "extension": ".astro",
+      "category": "dashboard",
+      "folder": "components/dashboard",
+      "exports": [
+        "StatItem",
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 86,
+      "file_size_bytes": 2515
+    },
+    {
+      "component_name": "Card",
+      "file_path": "components/data/Card.astro",
+      "absolute_path": "F:\\rag application\\components\\data\\Card.astro",
+      "extension": ".astro",
+      "category": "data",
+      "folder": "components/data",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 83,
+      "file_size_bytes": 1904
+    },
+    {
+      "component_name": "StatCard",
+      "file_path": "components/data/StatCard.astro",
+      "absolute_path": "F:\\rag application\\components\\data\\StatCard.astro",
+      "extension": ".astro",
+      "category": "data",
+      "folder": "components/data",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 89,
+      "file_size_bytes": 2429
+    },
+    {
+      "component_name": "Table",
+      "file_path": "components/data/Table.astro",
+      "absolute_path": "F:\\rag application\\components\\data\\Table.astro",
+      "extension": ".astro",
+      "category": "data",
+      "folder": "components/data",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 76,
+      "file_size_bytes": 2303
+    },
+    {
+      "component_name": "Timeline",
+      "file_path": "components/data/Timeline.astro",
+      "absolute_path": "F:\\rag application\\components\\data\\Timeline.astro",
+      "extension": ".astro",
+      "category": "data",
+      "folder": "components/data",
+      "exports": [
+        "TimelineItem",
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 78,
+      "file_size_bytes": 1963
+    },
+    {
+      "component_name": "Alert",
+      "file_path": "components/feedback/Alert.astro",
+      "absolute_path": "F:\\rag application\\components\\feedback\\Alert.astro",
+      "extension": ".astro",
+      "category": "feedback",
+      "folder": "components/feedback",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 105,
+      "file_size_bytes": 3091
+    },
+    {
+      "component_name": "Modal",
+      "file_path": "components/feedback/Modal.astro",
+      "absolute_path": "F:\\rag application\\components\\feedback\\Modal.astro",
+      "extension": ".astro",
+      "category": "feedback",
+      "folder": "components/feedback",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": true,
+      "line_count": 113,
+      "file_size_bytes": 3310
+    },
+    {
+      "component_name": "ProgressBar",
+      "file_path": "components/feedback/ProgressBar.astro",
+      "absolute_path": "F:\\rag application\\components\\feedback\\ProgressBar.astro",
+      "extension": ".astro",
+      "category": "feedback",
+      "folder": "components/feedback",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 89,
+      "file_size_bytes": 2180
+    },
+    {
+      "component_name": "Skeleton",
+      "file_path": "components/feedback/Skeleton.astro",
+      "absolute_path": "F:\\rag application\\components\\feedback\\Skeleton.astro",
+      "extension": ".astro",
+      "category": "feedback",
+      "folder": "components/feedback",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 106,
+      "file_size_bytes": 2841
+    },
+    {
+      "component_name": "Toast",
+      "file_path": "components/feedback/Toast.astro",
+      "absolute_path": "F:\\rag application\\components\\feedback\\Toast.astro",
+      "extension": ".astro",
+      "category": "feedback",
+      "folder": "components/feedback",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": true,
+      "line_count": 89,
+      "file_size_bytes": 2947
+    },
+    {
+      "component_name": "Checkbox",
+      "file_path": "components/forms/Checkbox.astro",
+      "absolute_path": "F:\\rag application\\components\\forms\\Checkbox.astro",
+      "extension": ".astro",
+      "category": "forms",
+      "folder": "components/forms",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 77,
+      "file_size_bytes": 1851
+    },
+    {
+      "component_name": "Input",
+      "file_path": "components/forms/Input.astro",
+      "absolute_path": "F:\\rag application\\components\\forms\\Input.astro",
+      "extension": ".astro",
+      "category": "forms",
+      "folder": "components/forms",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 115,
+      "file_size_bytes": 3116
+    },
+    {
+      "component_name": "SearchBar",
+      "file_path": "components/forms/SearchBar.astro",
+      "absolute_path": "F:\\rag application\\components\\forms\\SearchBar.astro",
+      "extension": ".astro",
+      "category": "forms",
+      "folder": "components/forms",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 91,
+      "file_size_bytes": 2432
+    },
+    {
+      "component_name": "Select",
+      "file_path": "components/forms/Select.astro",
+      "absolute_path": "F:\\rag application\\components\\forms\\Select.astro",
+      "extension": ".astro",
+      "category": "forms",
+      "folder": "components/forms",
+      "exports": [
+        "SelectOption",
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 110,
+      "file_size_bytes": 3157
+    },
+    {
+      "component_name": "Textarea",
+      "file_path": "components/forms/Textarea.astro",
+      "absolute_path": "F:\\rag application\\components\\forms\\Textarea.astro",
+      "extension": ".astro",
+      "category": "forms",
+      "folder": "components/forms",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 105,
+      "file_size_bytes": 2725
+    },
+    {
+      "component_name": "Container",
+      "file_path": "components/layout/Container.astro",
+      "absolute_path": "F:\\rag application\\components\\layout\\Container.astro",
+      "extension": ".astro",
+      "category": "layout",
+      "folder": "components/layout",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 58,
+      "file_size_bytes": 1163
+    },
+    {
+      "component_name": "Footer",
+      "file_path": "components/layout/Footer.astro",
+      "absolute_path": "F:\\rag application\\components\\layout\\Footer.astro",
+      "extension": ".astro",
+      "category": "layout",
+      "folder": "components/layout",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 76,
+      "file_size_bytes": 2118
+    },
+    {
+      "component_name": "Grid",
+      "file_path": "components/layout/Grid.astro",
+      "absolute_path": "F:\\rag application\\components\\layout\\Grid.astro",
+      "extension": ".astro",
+      "category": "layout",
+      "folder": "components/layout",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 75,
+      "file_size_bytes": 1351
+    },
+    {
+      "component_name": "Navbar",
+      "file_path": "components/layout/Navbar.astro",
+      "absolute_path": "F:\\rag application\\components\\layout\\Navbar.astro",
+      "extension": ".astro",
+      "category": "layout",
+      "folder": "components/layout",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": true,
+      "line_count": 105,
+      "file_size_bytes": 3146
+    },
+    {
+      "component_name": "Sidebar",
+      "file_path": "components/layout/Sidebar.astro",
+      "absolute_path": "F:\\rag application\\components\\layout\\Sidebar.astro",
+      "extension": ".astro",
+      "category": "layout",
+      "folder": "components/layout",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": true,
+      "line_count": 83,
+      "file_size_bytes": 2399
+    },
+    {
+      "component_name": "CTASection",
+      "file_path": "components/marketing/CTASection.astro",
+      "absolute_path": "F:\\rag application\\components\\marketing\\CTASection.astro",
+      "extension": ".astro",
+      "category": "marketing",
+      "folder": "components/marketing",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 60,
+      "file_size_bytes": 1665
+    },
+    {
+      "component_name": "FeatureGrid",
+      "file_path": "components/marketing/FeatureGrid.astro",
+      "absolute_path": "F:\\rag application\\components\\marketing\\FeatureGrid.astro",
+      "extension": ".astro",
+      "category": "marketing",
+      "folder": "components/marketing",
+      "exports": [
+        "Feature",
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 91,
+      "file_size_bytes": 2678
+    },
+    {
+      "component_name": "Hero",
+      "file_path": "components/marketing/Hero.astro",
+      "absolute_path": "F:\\rag application\\components\\marketing\\Hero.astro",
+      "extension": ".astro",
+      "category": "marketing",
+      "folder": "components/marketing",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 124,
+      "file_size_bytes": 3336
+    },
+    {
+      "component_name": "PricingCard",
+      "file_path": "components/marketing/PricingCard.astro",
+      "absolute_path": "F:\\rag application\\components\\marketing\\PricingCard.astro",
+      "extension": ".astro",
+      "category": "marketing",
+      "folder": "components/marketing",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 93,
+      "file_size_bytes": 2445
+    },
+    {
+      "component_name": "Testimonial",
+      "file_path": "components/marketing/Testimonial.astro",
+      "absolute_path": "F:\\rag application\\components\\marketing\\Testimonial.astro",
+      "extension": ".astro",
+      "category": "marketing",
+      "folder": "components/marketing",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 103,
+      "file_size_bytes": 3067
+    },
+    {
+      "component_name": "Breadcrumb",
+      "file_path": "components/navigation/Breadcrumb.astro",
+      "absolute_path": "F:\\rag application\\components\\navigation\\Breadcrumb.astro",
+      "extension": ".astro",
+      "category": "navigation",
+      "folder": "components/navigation",
+      "exports": [
+        "BreadcrumbItem",
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 59,
+      "file_size_bytes": 1492
+    },
+    {
+      "component_name": "Pagination",
+      "file_path": "components/navigation/Pagination.astro",
+      "absolute_path": "F:\\rag application\\components\\navigation\\Pagination.astro",
+      "extension": ".astro",
+      "category": "navigation",
+      "folder": "components/navigation",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 110,
+      "file_size_bytes": 3516
+    },
+    {
+      "component_name": "Steps",
+      "file_path": "components/navigation/Steps.astro",
+      "absolute_path": "F:\\rag application\\components\\navigation\\Steps.astro",
+      "extension": ".astro",
+      "category": "navigation",
+      "folder": "components/navigation",
+      "exports": [
+        "Step",
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 121,
+      "file_size_bytes": 3580
+    },
+    {
+      "component_name": "Tabs",
+      "file_path": "components/navigation/Tabs.astro",
+      "absolute_path": "F:\\rag application\\components\\navigation\\Tabs.astro",
+      "extension": ".astro",
+      "category": "navigation",
+      "folder": "components/navigation",
+      "exports": [
+        "Tab",
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": true,
+      "line_count": 121,
+      "file_size_bytes": 3435
+    },
+    {
+      "component_name": "Avatar",
+      "file_path": "components/ui/Avatar.astro",
+      "absolute_path": "F:\\rag application\\components\\ui\\Avatar.astro",
+      "extension": ".astro",
+      "category": "ui",
+      "folder": "components/ui",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 95,
+      "file_size_bytes": 2220
+    },
+    {
+      "component_name": "Badge",
+      "file_path": "components/ui/Badge.astro",
+      "absolute_path": "F:\\rag application\\components\\ui\\Badge.astro",
+      "extension": ".astro",
+      "category": "ui",
+      "folder": "components/ui",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 72,
+      "file_size_bytes": 1604
+    },
+    {
+      "component_name": "Button",
+      "file_path": "components/ui/Button.astro",
+      "absolute_path": "F:\\rag application\\components\\ui\\Button.astro",
+      "extension": ".astro",
+      "category": "ui",
+      "folder": "components/ui",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 104,
+      "file_size_bytes": 3137
+    },
+    {
+      "component_name": "Divider",
+      "file_path": "components/ui/Divider.astro",
+      "absolute_path": "F:\\rag application\\components\\ui\\Divider.astro",
+      "extension": ".astro",
+      "category": "ui",
+      "folder": "components/ui",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": true,
+      "has_script": false,
+      "line_count": 80,
+      "file_size_bytes": 2059
+    },
+    {
+      "component_name": "Spinner",
+      "file_path": "components/ui/Spinner.astro",
+      "absolute_path": "F:\\rag application\\components\\ui\\Spinner.astro",
+      "extension": ".astro",
+      "category": "ui",
+      "folder": "components/ui",
+      "exports": [
+        "Props"
+      ],
+      "has_props_interface": true,
+      "has_slots": false,
+      "has_script": false,
+      "line_count": 66,
+      "file_size_bytes": 1555
+    }
+  ],
+  "scan_metadata": {
+    "components_dir": "F:\\rag application\\components",
+    "skipped_files": 0,
+    "extensions_scanned": [
+      ".astro"
+    ]
+  }
+}

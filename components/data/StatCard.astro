@@ -1,0 +1,89 @@
+---
+/**
+ * StatCard - Key metric display card with trend indicator for dashboards.
+ *
+ * @component StatCard
+ * @category data
+ * @accessibility aria-label on trend icon
+ */
+
+export interface Props {
+  /** Metric label */
+  label: string;
+  /** Primary value (number or string) */
+  value: string | number;
+  /** Previous period value for change calculation */
+  previousValue?: number;
+  /** Manually set change label (overrides auto-calc) */
+  change?: string;
+  /** Direction of change */
+  trend?: "up" | "down" | "neutral";
+  /** Icon name or SVG path snippet */
+  icon?: string;
+  /** Icon background color variant */
+  iconVariant?: "primary" | "success" | "warning" | "danger" | "info";
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  label,
+  value,
+  change,
+  trend = "neutral",
+  icon,
+  iconVariant = "primary",
+  class: className = "",
+} = Astro.props;
+
+const trendColor: Record<string, string> = {
+  up: "text-green-600",
+  down: "text-red-600",
+  neutral: "text-gray-500",
+};
+
+const iconBgMap: Record<string, string> = {
+  primary: "bg-blue-100 text-blue-600",
+  success: "bg-green-100 text-green-600",
+  warning: "bg-yellow-100 text-yellow-600",
+  danger: "bg-red-100 text-red-600",
+  info: "bg-sky-100 text-sky-600",
+};
+
+const trendIcon = {
+  up: "M5 10l7-7m0 0l7 7m-7-7v18",
+  down: "M19 14l-7 7m0 0l-7-7m7 7V3",
+  neutral: "M5 12h14",
+};
+---
+
+<div
+  class:list={[
+    "bg-white rounded-xl border border-gray-200 shadow-sm p-5 flex items-start gap-4",
+    className,
+  ]}
+>
+  {icon && (
+    <div class:list={["flex-shrink-0 rounded-lg p-2.5", iconBgMap[iconVariant]]}>
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon} />
+      </svg>
+    </div>
+  )}
+
+  <div class="min-w-0 flex-1">
+    <p class="text-sm text-gray-500 font-medium truncate">{label}</p>
+    <p class="mt-1 text-2xl font-bold text-gray-900 tabular-nums">{value}</p>
+
+    {change && (
+      <p class:list={["mt-1 flex items-center gap-1 text-xs font-medium", trendColor[trend]]}>
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          aria-label={`Trend: ${trend}`}>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+            d={trendIcon[trend]} />
+        </svg>
+        {change}
+      </p>
+    )}
+  </div>
+</div>

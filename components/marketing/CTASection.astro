@@ -1,0 +1,60 @@
+---
+/**
+ * CTASection - Full-width call-to-action section with headline and action buttons.
+ *
+ * @component CTASection
+ * @category marketing
+ * @slot actions - Primary and secondary CTA buttons
+ */
+
+export interface Props {
+  /** Section headline */
+  heading: string;
+  /** Supporting description */
+  description?: string;
+  /** Background style */
+  background?: "blue" | "dark" | "light" | "gradient";
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  heading,
+  description,
+  background = "blue",
+  class: className = "",
+} = Astro.props;
+
+const bgMap: Record<string, string> = {
+  blue: "bg-blue-600",
+  dark: "bg-gray-900",
+  light: "bg-gray-50 border-y border-gray-200",
+  gradient: "bg-gradient-to-r from-blue-600 to-indigo-600",
+};
+
+const textMap: Record<string, { heading: string; desc: string }> = {
+  blue: { heading: "text-white", desc: "text-blue-100" },
+  dark: { heading: "text-white", desc: "text-gray-300" },
+  light: { heading: "text-gray-900", desc: "text-gray-600" },
+  gradient: { heading: "text-white", desc: "text-blue-100" },
+};
+---
+
+<section
+  class:list={["py-16 sm:py-24", bgMap[background], className]}
+  aria-label="Call to action"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class:list={["text-3xl sm:text-4xl font-bold tracking-tight", textMap[background].heading]}>
+      {heading}
+    </h2>
+    {description && (
+      <p class:list={["mt-4 text-lg max-w-xl mx-auto", textMap[background].desc]}>
+        {description}
+      </p>
+    )}
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <slot name="actions" />
+    </div>
+  </div>
+</section>

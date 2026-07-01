@@ -1,0 +1,91 @@
+---
+/**
+ * FeatureGrid - Marketing section displaying a grid of product features with icons.
+ *
+ * @component FeatureGrid
+ * @category marketing
+ * @slot default - FeatureItem children or custom feature cards
+ */
+
+export interface Feature {
+  /** Feature name */
+  title: string;
+  /** Feature description */
+  description: string;
+  /** SVG icon path (d attribute) */
+  icon?: string;
+  /** Icon background color */
+  iconVariant?: "primary" | "success" | "warning" | "danger" | "info";
+}
+
+export interface Props {
+  /** Section headline */
+  heading?: string;
+  /** Section subheading */
+  subheading?: string;
+  /** Feature definitions (or use slot for custom cards) */
+  features?: Feature[];
+  /** Number of columns */
+  cols?: 2 | 3 | 4;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  heading,
+  subheading,
+  features = [],
+  cols = 3,
+  class: className = "",
+} = Astro.props;
+
+const colMap: Record<number, string> = {
+  2: "sm:grid-cols-2",
+  3: "sm:grid-cols-2 lg:grid-cols-3",
+  4: "sm:grid-cols-2 lg:grid-cols-4",
+};
+
+const iconBgMap: Record<string, string> = {
+  primary: "bg-blue-100 text-blue-600",
+  success: "bg-green-100 text-green-600",
+  warning: "bg-yellow-100 text-yellow-600",
+  danger: "bg-red-100 text-red-600",
+  info: "bg-sky-100 text-sky-600",
+};
+---
+
+<section class:list={["py-16 sm:py-24", className]} aria-label="Features">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {(heading || subheading) && (
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        {heading && (
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">{heading}</h2>
+        )}
+        {subheading && (
+          <p class="mt-4 text-lg text-gray-600">{subheading}</p>
+        )}
+      </div>
+    )}
+
+    <div class:list={["grid grid-cols-1 gap-8", colMap[cols]]}>
+      {features.length > 0
+        ? features.map((f) => (
+          <div class="flex flex-col gap-4">
+            {f.icon && (
+              <div class:list={["inline-flex items-center justify-center h-12 w-12 rounded-xl flex-shrink-0", iconBgMap[f.iconVariant ?? "primary"]]}>
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d={f.icon} />
+                </svg>
+              </div>
+            )}
+            <div>
+              <h3 class="text-base font-semibold text-gray-900">{f.title}</h3>
+              <p class="mt-1.5 text-sm text-gray-600 leading-relaxed">{f.description}</p>
+            </div>
+          </div>
+        ))
+        : <slot />
+      }
+    </div>
+  </div>
+</section>

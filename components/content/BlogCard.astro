@@ -1,0 +1,136 @@
+---
+/**
+ * BlogCard - Blog post preview card with cover image, category, title, excerpt, and author.
+ *
+ * @component BlogCard
+ * @category content
+ * @slot image - Cover image (overrides coverSrc prop)
+ */
+
+export interface Props {
+  /** Post title */
+  title: string;
+  /** Short excerpt */
+  excerpt?: string;
+  /** Permalink */
+  href?: string;
+  /** Cover image URL */
+  coverSrc?: string;
+  /** Cover image alt text */
+  coverAlt?: string;
+  /** Category label */
+  category?: string;
+  /** Author name */
+  authorName?: string;
+  /** Author avatar URL */
+  authorImage?: string;
+  /** Published date string */
+  publishedAt?: string;
+  /** Estimated reading time */
+  readTime?: string;
+  /** Card orientation */
+  layout?: "vertical" | "horizontal";
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  title,
+  excerpt,
+  href = "#",
+  coverSrc,
+  coverAlt = "",
+  category,
+  authorName,
+  authorImage,
+  publishedAt,
+  readTime,
+  layout = "vertical",
+  class: className = "",
+} = Astro.props;
+
+const initials = (authorName ?? "A").split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+---
+
+<article
+  class:list={[
+    "bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden group",
+    layout === "horizontal" ? "flex" : "flex flex-col",
+    className,
+  ]}
+>
+  <!-- Cover image -->
+  <a
+    href={href}
+    class:list={[
+      "overflow-hidden flex-shrink-0",
+      layout === "horizontal" ? "w-48 sm:w-64" : "block",
+    ]}
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <slot name="image">
+      {coverSrc ? (
+        <img
+          src={coverSrc}
+          alt={coverAlt}
+          class:list={[
+            "w-full object-cover group-hover:scale-105 transition-transform duration-300",
+            layout === "horizontal" ? "h-full" : "h-48",
+          ]}
+        />
+      ) : (
+        <div class:list={[
+          "w-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center",
+          layout === "horizontal" ? "h-full" : "h-48",
+        ]}>
+          <svg class="h-10 w-10 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+      )}
+    </slot>
+  </a>
+
+  <!-- Content -->
+  <div class="flex flex-col flex-1 p-5">
+    {category && (
+      <span class="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-2">
+        {category}
+      </span>
+    )}
+
+    <h2 class="text-base font-bold text-gray-900 leading-snug group-hover:text-blue-600 transition-colors">
+      <a href={href} class="focus:outline-none focus:underline">
+        {title}
+      </a>
+    </h2>
+
+    {excerpt && (
+      <p class="mt-2 text-sm text-gray-600 line-clamp-3 leading-relaxed flex-1">
+        {excerpt}
+      </p>
+    )}
+
+    <!-- Meta row -->
+    <div class="mt-4 flex items-center gap-3">
+      {authorImage ? (
+        <img src={authorImage} alt={authorName ?? "Author"} class="h-7 w-7 rounded-full object-cover flex-shrink-0" />
+      ) : authorName ? (
+        <span class="inline-flex items-center justify-center h-7 w-7 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold flex-shrink-0">
+          {initials}
+        </span>
+      ) : null}
+
+      <div class="min-w-0">
+        {authorName && <p class="text-xs font-medium text-gray-700 truncate">{authorName}</p>}
+        <div class="flex items-center gap-2 text-xs text-gray-400">
+          {publishedAt && <time datetime={publishedAt}>{publishedAt}</time>}
+          {publishedAt && readTime && <span aria-hidden="true">·</span>}
+          {readTime && <span>{readTime} read</span>}
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,105 @@
+---
+/**
+ * Navbar - Responsive sticky top navigation bar.
+ *
+ * @component Navbar
+ * @category layout
+ * @accessibility aria-label on nav, aria-expanded on mobile toggle, sr-only skip text
+ * @slot logo    - Custom logo/brand content
+ * @slot links   - Navigation anchor items
+ * @slot actions - Right-side CTA buttons (login, signup, etc.)
+ */
+
+export interface Props {
+  /** Brand name shown when no logo slot is provided */
+  logoText?: string;
+  /** Render a bottom border and drop shadow */
+  bordered?: boolean;
+  /** Use a glass / transparent background */
+  transparent?: boolean;
+  /** Extra CSS classes applied to the <header> */
+  class?: string;
+}
+
+const {
+  logoText = "Brand",
+  bordered = true,
+  transparent = false,
+  class: className = "",
+} = Astro.props;
+---
+
+<header
+  class:list={[
+    "sticky top-0 w-full z-50",
+    bordered ? "border-b border-gray-200 shadow-sm" : "",
+    transparent ? "bg-white/80 backdrop-blur-md" : "bg-white",
+    className,
+  ]}
+  role="banner"
+>
+  <nav
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    aria-label="Primary navigation"
+  >
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo / Brand -->
+      <div class="flex-shrink-0 flex items-center">
+        <slot name="logo">
+          <span class="text-xl font-bold text-gray-900 tracking-tight">
+            {logoText}
+          </span>
+        </slot>
+      </div>
+
+      <!-- Desktop navigation links -->
+      <div class="hidden md:flex items-center gap-6" role="list">
+        <slot name="links" />
+      </div>
+
+      <!-- Desktop right-side actions -->
+      <div class="hidden md:flex items-center gap-3">
+        <slot name="actions" />
+      </div>
+
+      <!-- Mobile hamburger toggle -->
+      <button
+        id="navbar-toggle"
+        type="button"
+        class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors"
+        aria-controls="navbar-mobile-menu"
+        aria-expanded="false"
+        aria-label="Toggle navigation menu"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu panel -->
+    <div
+      id="navbar-mobile-menu"
+      class="md:hidden hidden border-t border-gray-100 py-3 space-y-1"
+      role="navigation"
+      aria-label="Mobile navigation"
+    >
+      <slot name="links" />
+      <div class="pt-3 border-t border-gray-100 flex flex-col gap-2">
+        <slot name="actions" />
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById("navbar-toggle");
+  const menu = document.getElementById("navbar-mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    menu?.classList.toggle("hidden");
+  });
+</script>

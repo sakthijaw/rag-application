@@ -1,0 +1,83 @@
+---
+/**
+ * Sidebar - Collapsible vertical navigation sidebar for dashboards and apps.
+ *
+ * @component Sidebar
+ * @category layout
+ * @accessibility aria-label, aria-current on active item, keyboard navigable
+ * @slot header     - Top section (logo / workspace switcher)
+ * @slot navigation - Nav item groups
+ * @slot footer     - Bottom section (user profile, settings link)
+ */
+
+export interface Props {
+  /** Default collapsed state on mobile */
+  collapsed?: boolean;
+  /** Fixed position (true) or static in flow */
+  fixed?: boolean;
+  /** Pixel width of the expanded sidebar */
+  width?: number;
+  /** Dark variant */
+  dark?: boolean;
+}
+
+const {
+  collapsed = false,
+  fixed = true,
+  width = 256,
+  dark = false,
+} = Astro.props;
+---
+
+<aside
+  id="sidebar"
+  style={`width: ${width}px;`}
+  class:list={[
+    "flex flex-col h-screen z-40 transition-transform duration-300",
+    fixed ? "fixed left-0 top-0" : "relative",
+    dark
+      ? "bg-gray-900 border-r border-gray-800 text-gray-200"
+      : "bg-white border-r border-gray-200 text-gray-700",
+    collapsed ? "-translate-x-full md:translate-x-0" : "translate-x-0",
+  ]}
+  aria-label="Sidebar navigation"
+  data-collapsed={String(collapsed)}
+>
+  <!-- Sidebar header (logo/brand) -->
+  <div class:list={["flex items-center px-4 h-16 flex-shrink-0 border-b",
+    dark ? "border-gray-800" : "border-gray-200"]}>
+    <slot name="header" />
+  </div>
+
+  <!-- Navigation area -->
+  <nav class="flex-1 overflow-y-auto py-4 px-3" aria-label="Sidebar navigation links">
+    <slot name="navigation" />
+  </nav>
+
+  <!-- Footer area (user profile / logout) -->
+  <div class:list={["flex-shrink-0 border-t px-4 py-3",
+    dark ? "border-gray-800" : "border-gray-200"]}>
+    <slot name="footer" />
+  </div>
+</aside>
+
+<!-- Mobile overlay backdrop -->
+<div
+  id="sidebar-backdrop"
+  class="fixed inset-0 bg-black/40 z-30 hidden md:hidden"
+  aria-hidden="true"
+></div>
+
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const backdrop = document.getElementById("sidebar-backdrop");
+
+  window.toggleSidebar = () => {
+    const isCollapsed = sidebar?.getAttribute("data-collapsed") === "true";
+    sidebar?.classList.toggle("-translate-x-full");
+    sidebar?.setAttribute("data-collapsed", String(!isCollapsed));
+    backdrop?.classList.toggle("hidden");
+  };
+
+  backdrop?.addEventListener("click", () => window.toggleSidebar());
+</script>

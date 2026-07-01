@@ -1,0 +1,83 @@
+---
+/**
+ * Card - Versatile content container with optional header, footer, and image.
+ *
+ * @component Card
+ * @category data
+ * @slot image   - Top image area
+ * @slot header  - Card header with title and actions
+ * @slot default - Main card body content
+ * @slot footer  - Card footer with actions or metadata
+ */
+
+export interface Props {
+  /** Card title (shown in default header if no header slot) */
+  title?: string;
+  /** Subtitle or description */
+  subtitle?: string;
+  /** Remove padding from card body */
+  noPadding?: boolean;
+  /** Shadow depth */
+  shadow?: "none" | "sm" | "md" | "lg";
+  /** Clickable card with hover effect */
+  hoverable?: boolean;
+  /** Make entire card a link */
+  href?: string;
+  /** Show a border */
+  bordered?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  noPadding = false,
+  shadow = "sm",
+  hoverable = false,
+  href,
+  bordered = true,
+  class: className = "",
+} = Astro.props;
+
+const Tag = href ? "a" : "div";
+
+const shadowMap: Record<string, string> = {
+  none: "shadow-none",
+  sm: "shadow-sm",
+  md: "shadow-md",
+  lg: "shadow-lg",
+};
+---
+
+<Tag
+  href={href}
+  class:list={[
+    "bg-white rounded-xl overflow-hidden flex flex-col",
+    shadowMap[shadow],
+    bordered ? "border border-gray-200" : "",
+    hoverable || href ? "transition-shadow hover:shadow-md cursor-pointer" : "",
+    className,
+  ]}
+>
+  <!-- Image slot -->
+  <slot name="image" />
+
+  <!-- Header -->
+  <slot name="header">
+    {(title || subtitle) && (
+      <div class="px-5 pt-5 pb-0">
+        {title && <h3 class="font-semibold text-gray-900 text-base leading-snug">{title}</h3>}
+        {subtitle && <p class="text-sm text-gray-500 mt-0.5">{subtitle}</p>}
+      </div>
+    )}
+  </slot>
+
+  <!-- Body -->
+  <div class:list={["flex-1", noPadding ? "" : "p-5"]}>
+    <slot />
+  </div>
+
+  <!-- Footer -->
+  <slot name="footer" />
+</Tag>

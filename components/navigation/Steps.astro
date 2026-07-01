@@ -1,0 +1,121 @@
+---
+/**
+ * Steps - Multi-step wizard / progress indicator showing current position in a flow.
+ *
+ * @component Steps
+ * @category navigation
+ * @accessibility aria-label, aria-current on active step
+ */
+
+export interface Step {
+  /** Step label */
+  label: string;
+  /** Optional description */
+  description?: string;
+  /** Step state */
+  status?: "completed" | "current" | "upcoming";
+}
+
+export interface Props {
+  /** Step definitions */
+  steps: Step[];
+  /** Currently active step index (0-based) */
+  currentStep?: number;
+  /** Orientation */
+  orientation?: "horizontal" | "vertical";
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  steps,
+  currentStep = 0,
+  orientation = "horizontal",
+  class: className = "",
+} = Astro.props;
+
+function getStatus(index: number): "completed" | "current" | "upcoming" {
+  if (index < currentStep) return "completed";
+  if (index === currentStep) return "current";
+  return "upcoming";
+}
+---
+
+<nav
+  aria-label="Progress steps"
+  class:list={[
+    orientation === "horizontal"
+      ? "flex items-center justify-between w-full"
+      : "flex flex-col gap-0",
+    className,
+  ]}
+>
+  {steps.map((step, index) => {
+    const status = step.status ?? getStatus(index);
+    const isLast = index === steps.length - 1;
+
+    return (
+      <div
+        class:list={[
+          orientation === "horizontal"
+            ? "flex items-center flex-1"
+            : "flex items-start gap-4 pb-8 relative",
+        ]}
+      >
+        <!-- Step circle -->
+        <div class="flex flex-col items-center flex-shrink-0">
+          <span
+            aria-current={status === "current" ? "step" : undefined}
+            class:list={[
+              "flex h-9 w-9 items-center justify-center rounded-full border-2 text-sm font-semibold transition-colors",
+              status === "completed"
+                ? "bg-blue-600 border-blue-600 text-white"
+                : status === "current"
+                ? "bg-white border-blue-600 text-blue-600"
+                : "bg-white border-gray-300 text-gray-400",
+            ]}
+          >
+            {status === "completed" ? (
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              index + 1
+            )}
+          </span>
+
+          {orientation === "vertical" && !isLast && (
+            <div class:list={[
+              "mt-1 w-0.5 flex-1 min-h-[2rem]",
+              status === "completed" ? "bg-blue-600" : "bg-gray-200",
+            ]} aria-hidden="true" />
+          )}
+        </div>
+
+        <!-- Step label -->
+        <div class:list={[
+          orientation === "horizontal" ? "ml-3" : "ml-4 pt-1 pb-8",
+          isLast && orientation === "horizontal" ? "" : "flex-1",
+        ]}>
+          <p class:list={[
+            "text-sm font-medium",
+            status === "current" ? "text-blue-600" : status === "completed" ? "text-gray-900" : "text-gray-400",
+          ]}>
+            {step.label}
+          </p>
+          {step.description && (
+            <p class="text-xs text-gray-500 mt-0.5">{step.description}</p>
+          )}
+        </div>
+
+        <!-- Connector line (horizontal only) -->
+        {orientation === "horizontal" && !isLast && (
+          <div class:list={[
+            "flex-1 h-0.5 mx-4",
+            status === "completed" ? "bg-blue-600" : "bg-gray-200",
+          ]} aria-hidden="true" />
+        )}
+      </div>
+    );
+  })}
+</nav>

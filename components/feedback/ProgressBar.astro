@@ -1,0 +1,89 @@
+---
+/**
+ * ProgressBar - Visual progress indicator for tasks, uploads, and multi-step flows.
+ *
+ * @component ProgressBar
+ * @category feedback
+ * @accessibility role="progressbar", aria-valuenow, aria-valuemin, aria-valuemax
+ */
+
+export interface Props {
+  /** Current progress (0–100) */
+  value: number;
+  /** Minimum value */
+  min?: number;
+  /** Maximum value */
+  max?: number;
+  /** Display the percentage label */
+  showLabel?: boolean;
+  /** Color variant */
+  variant?: "primary" | "success" | "warning" | "danger";
+  /** Height size */
+  size?: "xs" | "sm" | "md" | "lg";
+  /** Animated stripe effect */
+  striped?: boolean;
+  /** Pulse animation for indeterminate state */
+  indeterminate?: boolean;
+  /** Accessible label */
+  label?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  value,
+  min = 0,
+  max = 100,
+  showLabel = false,
+  variant = "primary",
+  size = "md",
+  striped = false,
+  indeterminate = false,
+  label = "Progress",
+  class: className = "",
+} = Astro.props;
+
+const pct = Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100));
+
+const variantMap: Record<string, string> = {
+  primary: "bg-blue-600",
+  success: "bg-green-500",
+  warning: "bg-yellow-400",
+  danger: "bg-red-500",
+};
+
+const sizeMap: Record<string, string> = {
+  xs: "h-1",
+  sm: "h-1.5",
+  md: "h-2.5",
+  lg: "h-4",
+};
+---
+
+<div class:list={["w-full", className]}>
+  {showLabel && (
+    <div class="flex justify-between items-center mb-1">
+      <span class="text-sm font-medium text-gray-700">{label}</span>
+      <span class="text-sm text-gray-500">{Math.round(pct)}%</span>
+    </div>
+  )}
+
+  <div
+    class:list={["w-full bg-gray-200 rounded-full overflow-hidden", sizeMap[size]]}
+    role="progressbar"
+    aria-valuenow={indeterminate ? undefined : value}
+    aria-valuemin={min}
+    aria-valuemax={max}
+    aria-label={label}
+  >
+    <div
+      class:list={[
+        "h-full rounded-full transition-all duration-500 ease-out",
+        variantMap[variant],
+        indeterminate ? "animate-pulse w-full" : "",
+        striped ? "bg-stripes" : "",
+      ]}
+      style={indeterminate ? undefined : `width: ${pct}%;`}
+    />
+  </div>
+</div>

@@ -1,0 +1,106 @@
+---
+/**
+ * Skeleton - Animated loading placeholder for content areas.
+ *
+ * @component Skeleton
+ * @category feedback
+ * @accessibility aria-busy, aria-label for screen readers
+ */
+
+export interface Props {
+  /** Shape preset */
+  variant?: "text" | "circle" | "rect" | "card";
+  /** Width (CSS value or Tailwind class approach) */
+  width?: string;
+  /** Height (CSS value) */
+  height?: string;
+  /** Number of text lines to show (only for variant="text") */
+  lines?: number;
+  /** Pulse animation (true) vs. wave shimmer (false) */
+  pulse?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  variant = "rect",
+  width = "100%",
+  height = "1rem",
+  lines = 3,
+  pulse = true,
+  class: className = "",
+} = Astro.props;
+---
+
+{variant === "text" ? (
+  <div
+    role="status"
+    aria-label="Loading content"
+    aria-busy="true"
+    class:list={["space-y-2", className]}
+  >
+    {Array.from({ length: lines }).map((_, i) => (
+      <div
+        class:list={[
+          "rounded",
+          pulse ? "animate-pulse" : "animate-shimmer",
+          "bg-gray-200",
+        ]}
+        style={`height: ${height}; width: ${i === lines - 1 ? "75%" : "100%"};`}
+        aria-hidden="true"
+      />
+    ))}
+    <span class="sr-only">Loading...</span>
+  </div>
+) : variant === "circle" ? (
+  <div
+    role="status"
+    aria-label="Loading"
+    aria-busy="true"
+    class:list={[
+      "rounded-full bg-gray-200",
+      pulse ? "animate-pulse" : "",
+      className,
+    ]}
+    style={`width: ${width}; height: ${width};`}
+    aria-hidden="true"
+  >
+    <span class="sr-only">Loading...</span>
+  </div>
+) : variant === "card" ? (
+  <div
+    role="status"
+    aria-label="Loading card"
+    aria-busy="true"
+    class:list={["rounded-lg border border-gray-100 p-4 space-y-3", className]}
+  >
+    <div class="flex items-center gap-3">
+      <div class="rounded-full bg-gray-200 animate-pulse h-10 w-10 flex-shrink-0" aria-hidden="true" />
+      <div class="flex-1 space-y-2">
+        <div class="h-3 bg-gray-200 rounded animate-pulse w-3/4" aria-hidden="true" />
+        <div class="h-2.5 bg-gray-200 rounded animate-pulse w-1/2" aria-hidden="true" />
+      </div>
+    </div>
+    <div class="space-y-2">
+      <div class="h-2.5 bg-gray-200 rounded animate-pulse" aria-hidden="true" />
+      <div class="h-2.5 bg-gray-200 rounded animate-pulse" aria-hidden="true" />
+      <div class="h-2.5 bg-gray-200 rounded animate-pulse w-4/5" aria-hidden="true" />
+    </div>
+    <span class="sr-only">Loading...</span>
+  </div>
+) : (
+  <div
+    role="status"
+    aria-label="Loading"
+    aria-busy="true"
+    class:list={[
+      "rounded bg-gray-200",
+      pulse ? "animate-pulse" : "",
+      className,
+    ]}
+    style={`width: ${width}; height: ${height};`}
+    aria-hidden="true"
+  >
+    <span class="sr-only">Loading...</span>
+  </div>
+)}

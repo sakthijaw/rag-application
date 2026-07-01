@@ -1,0 +1,76 @@
+---
+/**
+ * Footer - Site-wide footer with column links and copyright notice.
+ *
+ * @component Footer
+ * @category layout
+ * @accessibility role="contentinfo", landmark region
+ * @slot columns - Footer link column groups
+ * @slot social   - Social media icon links
+ * @slot legal    - Extra legal/policy links row
+ */
+
+export interface Props {
+  /** Company or brand name for the copyright line */
+  brandName?: string;
+  /** Copyright year (defaults to current year) */
+  year?: number;
+  /** Tagline shown under the brand name */
+  tagline?: string;
+  /** Show a top divider border */
+  bordered?: boolean;
+  /** Dark background variant */
+  dark?: boolean;
+}
+
+const {
+  brandName = "Company",
+  year = new Date().getFullYear(),
+  tagline = "Building great products.",
+  bordered = true,
+  dark = false,
+} = Astro.props;
+---
+
+<footer
+  role="contentinfo"
+  class:list={[
+    "w-full mt-auto",
+    bordered ? "border-t border-gray-200" : "",
+    dark ? "bg-gray-900 text-gray-300" : "bg-white text-gray-600",
+  ]}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Top section: brand + columns -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <!-- Brand block -->
+      <div class="col-span-1">
+        <p class:list={["text-xl font-bold", dark ? "text-white" : "text-gray-900"]}>
+          {brandName}
+        </p>
+        <p class="mt-2 text-sm leading-relaxed">{tagline}</p>
+        <div class="mt-4 flex items-center gap-3">
+          <slot name="social" />
+        </div>
+      </div>
+
+      <!-- Link columns -->
+      <div class="col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-8">
+        <slot name="columns" />
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div
+      class:list={[
+        "mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm",
+        dark ? "border-t border-gray-700" : "border-t border-gray-200",
+      ]}
+    >
+      <p>&copy; {year} {brandName}. All rights reserved.</p>
+      <nav aria-label="Legal links" class="flex items-center gap-4">
+        <slot name="legal" />
+      </nav>
+    </div>
+  </div>
+</footer>

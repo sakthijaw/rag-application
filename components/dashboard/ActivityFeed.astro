@@ -1,0 +1,110 @@
+---
+/**
+ * ActivityFeed - Scrollable list of recent user or system activity events.
+ *
+ * @component ActivityFeed
+ * @category dashboard
+ * @slot default - ActivityItem children (or supply items prop)
+ */
+
+export interface ActivityItem {
+  /** Short description of the event */
+  description: string;
+  /** When the event occurred */
+  timestamp: string;
+  /** Who triggered the event */
+  actor?: string;
+  /** Actor avatar URL */
+  actorImage?: string;
+  /** Event type for icon color */
+  type?: "info" | "success" | "warning" | "error";
+}
+
+export interface Props {
+  /** Activity items */
+  items?: ActivityItem[];
+  /** Section title */
+  title?: string;
+  /** Max height with scroll */
+  maxHeight?: string;
+  /** Show empty state message */
+  emptyMessage?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  items = [],
+  title = "Recent Activity",
+  maxHeight = "400px",
+  emptyMessage = "No recent activity.",
+  class: className = "",
+} = Astro.props;
+
+const typeColorMap: Record<string, string> = {
+  info: "bg-blue-100 text-blue-600",
+  success: "bg-green-100 text-green-600",
+  warning: "bg-yellow-100 text-yellow-600",
+  error: "bg-red-100 text-red-600",
+};
+
+const typeIconMap: Record<string, string> = {
+  info: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+  success: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+  warning: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+  error: "M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z",
+};
+---
+
+<section
+  class:list={["bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden", className]}
+  aria-label={title}
+>
+  <div class="px-5 py-4 border-b border-gray-100">
+    <h3 class="text-sm font-semibold text-gray-900">{title}</h3>
+  </div>
+
+  <div class="overflow-y-auto" style={`max-height: ${maxHeight};`}>
+    {items.length === 0 ? (
+      <div class="flex flex-col items-center justify-center py-12 text-gray-400">
+        <svg class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        <p class="text-sm">{emptyMessage}</p>
+      </div>
+    ) : (
+      <ul class="divide-y divide-gray-50" role="list">
+        {items.map((item) => {
+          const t = item.type ?? "info";
+          const initials = (item.actor ?? "?").split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+          return (
+            <li class="flex items-start gap-3 px-5 py-3.5 hover:bg-gray-50 transition-colors">
+              <!-- Actor avatar or type icon -->
+              {item.actorImage ? (
+                <img src={item.actorImage} alt={item.actor ?? "User"}
+                  class="h-8 w-8 rounded-full object-cover flex-shrink-0 mt-0.5" />
+              ) : item.actor ? (
+                <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold flex-shrink-0 mt-0.5">
+                  {initials}
+                </span>
+              ) : (
+                <span class:list={["inline-flex items-center justify-center h-8 w-8 rounded-full flex-shrink-0 mt-0.5", typeColorMap[t]]}>
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={typeIconMap[t]} />
+                  </svg>
+                </span>
+              )}
+
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-gray-800">{item.description}</p>
+                <time class="text-xs text-gray-400 mt-0.5 block">{item.timestamp}</time>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    )}
+    <slot />
+  </div>
+</section>

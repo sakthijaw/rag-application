@@ -1,0 +1,91 @@
+---
+/**
+ * SearchBar - Search input field with icon, clear button, and keyboard shortcut hint.
+ *
+ * @component SearchBar
+ * @category forms
+ * @accessibility role="search", aria-label, keyboard accessible clear button
+ */
+
+export interface Props {
+  /** Placeholder text */
+  placeholder?: string;
+  /** Current search value */
+  value?: string;
+  /** Input name attribute */
+  name?: string;
+  /** Size preset */
+  size?: "sm" | "md" | "lg";
+  /** Show keyboard shortcut hint (e.g., ⌘K) */
+  shortcut?: string;
+  /** Submit action URL (turns into a form) */
+  action?: string;
+  /** Disabled state */
+  disabled?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  placeholder = "Search...",
+  value = "",
+  name = "q",
+  size = "md",
+  shortcut,
+  action,
+  disabled = false,
+  class: className = "",
+} = Astro.props;
+
+const sizeMap: Record<string, { input: string; icon: string }> = {
+  sm: { input: "pl-8 pr-3 py-1.5 text-sm", icon: "h-4 w-4 left-2.5" },
+  md: { input: "pl-10 pr-4 py-2 text-sm", icon: "h-4 w-4 left-3" },
+  lg: { input: "pl-12 pr-4 py-2.5 text-base", icon: "h-5 w-5 left-3.5" },
+};
+
+const Tag = action ? "form" : "div";
+---
+
+<Tag
+  role="search"
+  action={action}
+  method={action ? "get" : undefined}
+  class:list={["relative flex items-center", className]}
+>
+  <!-- Search icon -->
+  <svg
+    class:list={["absolute text-gray-400 pointer-events-none", sizeMap[size].icon]}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+  </svg>
+
+  <input
+    id="search-input"
+    type="search"
+    name={name}
+    value={value}
+    placeholder={placeholder}
+    disabled={disabled}
+    autocomplete="off"
+    aria-label={placeholder}
+    class:list={[
+      "block w-full rounded-md border border-gray-300 bg-white shadow-sm",
+      "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+      "placeholder-gray-400 text-gray-900 transition-colors",
+      disabled ? "bg-gray-50 cursor-not-allowed" : "",
+      sizeMap[size].input,
+    ]}
+  />
+
+  {shortcut && (
+    <kbd class="absolute right-3 hidden sm:flex items-center gap-0.5 text-xs text-gray-400 font-mono border border-gray-200 rounded px-1.5 py-0.5">
+      {shortcut}
+    </kbd>
+  )}
+</Tag>

@@ -1,0 +1,115 @@
+---
+/**
+ * Input - Accessible text input field with label, helper text, and error state.
+ *
+ * @component Input
+ * @category forms
+ * @accessibility aria-describedby links input to helper/error, aria-invalid on error
+ */
+
+export interface Props {
+  /** Unique id — required for label association */
+  id: string;
+  /** Field label text */
+  label?: string;
+  /** Input type */
+  type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search" | "date";
+  /** Placeholder text */
+  placeholder?: string;
+  /** Current value */
+  value?: string | number;
+  /** Marks field as required */
+  required?: boolean;
+  /** Disabled state */
+  disabled?: boolean;
+  /** Read-only state */
+  readonly?: boolean;
+  /** Error message (triggers error styling) */
+  error?: string;
+  /** Helper text shown below the input */
+  helper?: string;
+  /** Prepend icon or text */
+  prefix?: string;
+  /** Append icon or text */
+  suffix?: string;
+  /** Size variant */
+  size?: "sm" | "md" | "lg";
+  /** Additional CSS classes for the <input> element */
+  class?: string;
+}
+
+const {
+  id,
+  label,
+  type = "text",
+  placeholder,
+  value,
+  required = false,
+  disabled = false,
+  readonly = false,
+  error,
+  helper,
+  size = "md",
+  class: className = "",
+} = Astro.props;
+
+const sizeMap: Record<string, string> = {
+  sm: "px-3 py-1.5 text-sm",
+  md: "px-3.5 py-2 text-sm",
+  lg: "px-4 py-2.5 text-base",
+};
+
+const helperId = helper ? `${id}-helper` : undefined;
+const errorId = error ? `${id}-error` : undefined;
+const describedBy = [helperId, errorId].filter(Boolean).join(" ") || undefined;
+---
+
+<div class="flex flex-col gap-1">
+  {label && (
+    <label
+      for={id}
+      class:list={[
+        "block text-sm font-medium",
+        error ? "text-red-600" : "text-gray-700",
+      ]}
+    >
+      {label}
+      {required && <span class="text-red-500 ml-0.5" aria-hidden="true">*</span>}
+    </label>
+  )}
+
+  <input
+    id={id}
+    name={id}
+    type={type}
+    placeholder={placeholder}
+    value={value}
+    required={required}
+    disabled={disabled}
+    readonly={readonly}
+    aria-invalid={error ? "true" : "false"}
+    aria-describedby={describedBy}
+    class:list={[
+      "block w-full rounded-md border bg-white shadow-sm transition-colors",
+      "focus:outline-none focus:ring-2 focus:ring-offset-0",
+      error
+        ? "border-red-400 focus:border-red-400 focus:ring-red-300"
+        : "border-gray-300 focus:border-blue-500 focus:ring-blue-200",
+      disabled ? "bg-gray-50 text-gray-400 cursor-not-allowed" : "text-gray-900",
+      sizeMap[size],
+      className,
+    ]}
+  />
+
+  {helper && !error && (
+    <p id={helperId} class="text-xs text-gray-500">{helper}</p>
+  )}
+  {error && (
+    <p id={errorId} role="alert" class="text-xs text-red-600 flex items-center gap-1">
+      <svg class="h-3.5 w-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+      </svg>
+      {error}
+    </p>
+  )}
+</div>

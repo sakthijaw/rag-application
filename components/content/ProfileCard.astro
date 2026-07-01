@@ -1,0 +1,122 @@
+---
+/**
+ * ProfileCard - User profile display card with avatar, bio, stats, and social links.
+ *
+ * @component ProfileCard
+ * @category content
+ * @slot stats   - Follower/following/post count items
+ * @slot actions - Follow, message, or edit buttons
+ * @slot links   - Social media link icons
+ */
+
+export interface Props {
+  /** User full name */
+  name: string;
+  /** Job title or role */
+  role?: string;
+  /** Company or organisation */
+  company?: string;
+  /** Short bio */
+  bio?: string;
+  /** Avatar image URL */
+  avatarSrc?: string;
+  /** Cover / banner image URL */
+  coverSrc?: string;
+  /** Verified badge */
+  verified?: boolean;
+  /** Layout: vertical (portrait) or horizontal */
+  layout?: "vertical" | "horizontal";
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  name,
+  role,
+  company,
+  bio,
+  avatarSrc,
+  coverSrc,
+  verified = false,
+  layout = "vertical",
+  class: className = "",
+} = Astro.props;
+
+const initials = name.split(" ").slice(0, 2).map(n => n[0]?.toUpperCase() ?? "").join("");
+---
+
+<article
+  class:list={[
+    "bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden",
+    layout === "horizontal" ? "flex" : "flex-col",
+    className,
+  ]}
+  aria-label={`Profile card for ${name}`}
+>
+  <!-- Cover image -->
+  {coverSrc ? (
+    <div class:list={[
+      layout === "horizontal" ? "hidden" : "h-28 bg-gray-100",
+    ]}>
+      <img src={coverSrc} alt="" aria-hidden="true" class="w-full h-full object-cover" />
+    </div>
+  ) : (
+    <div class:list={[
+      layout === "horizontal" ? "hidden" : "h-20 bg-gradient-to-r from-blue-400 to-indigo-500",
+    ]} aria-hidden="true" />
+  )}
+
+  <div class:list={[
+    "flex flex-col gap-4 p-5",
+    layout === "horizontal" ? "flex-row items-center" : "",
+  ]}>
+    <!-- Avatar -->
+    <div class:list={[
+      layout === "vertical" ? "-mt-10" : "flex-shrink-0",
+    ]}>
+      {avatarSrc ? (
+        <img src={avatarSrc} alt={`${name} avatar`}
+          class="h-16 w-16 rounded-full border-4 border-white object-cover shadow-sm" />
+      ) : (
+        <span class="inline-flex items-center justify-center h-16 w-16 rounded-full border-4 border-white bg-blue-100 text-blue-700 text-xl font-bold shadow-sm">
+          {initials}
+        </span>
+      )}
+    </div>
+
+    <!-- Info -->
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <h3 class="text-base font-semibold text-gray-900 truncate">{name}</h3>
+        {verified && (
+          <svg class="h-4 w-4 text-blue-500 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-label="Verified">
+            <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+          </svg>
+        )}
+      </div>
+      {role && (
+        <p class="text-sm text-gray-500">
+          {role}{company ? ` · ${company}` : ""}
+        </p>
+      )}
+      {bio && (
+        <p class="mt-2 text-sm text-gray-600 leading-relaxed line-clamp-3">{bio}</p>
+      )}
+
+      <!-- Stats -->
+      <div class="mt-3 flex items-center gap-5">
+        <slot name="stats" />
+      </div>
+
+      <!-- Actions -->
+      <div class="mt-4 flex items-center gap-2 flex-wrap">
+        <slot name="actions" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Social links -->
+  <div class="px-5 pb-4 flex items-center gap-3">
+    <slot name="links" />
+  </div>
+</article>

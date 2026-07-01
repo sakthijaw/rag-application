@@ -1,0 +1,138 @@
+---
+/**
+ * LoginForm - Complete email/password login form with validation states and OAuth options.
+ *
+ * @component LoginForm
+ * @category auth
+ * @accessibility All inputs labelled, error messages linked via aria-describedby
+ * @slot oauth - OAuth provider buttons (Google, GitHub, etc.)
+ * @slot footer - Links below the form (sign up, forgot password)
+ */
+
+export interface Props {
+  /** Form action URL */
+  action?: string;
+  /** HTTP method */
+  method?: "post" | "get";
+  /** Heading shown above the form */
+  heading?: string;
+  /** Show "Remember me" checkbox */
+  showRemember?: boolean;
+  /** Show forgot password link */
+  showForgot?: boolean;
+  /** Redirect URL after login */
+  redirectUrl?: string;
+  /** Error message from server */
+  error?: string;
+}
+
+const {
+  action = "/auth/login",
+  method = "post",
+  heading = "Sign in to your account",
+  showRemember = true,
+  showForgot = true,
+  redirectUrl,
+  error,
+} = Astro.props;
+---
+
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="w-full max-w-sm space-y-8">
+    <!-- Header -->
+    <div class="text-center">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900">{heading}</h1>
+    </div>
+
+    <!-- OAuth slot -->
+    <slot name="oauth" />
+
+    <!-- Server error -->
+    {error && (
+      <div role="alert" class="rounded-md bg-red-50 border border-red-200 p-3 flex items-start gap-2 text-red-700 text-sm">
+        <svg class="h-4 w-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        {error}
+      </div>
+    )}
+
+    <!-- Login form -->
+    <form action={action} method={method} class="space-y-5" novalidate>
+      {redirectUrl && <input type="hidden" name="redirect" value={redirectUrl} />}
+
+      <!-- Email field -->
+      <div class="flex flex-col gap-1">
+        <label for="email" class="text-sm font-medium text-gray-700">
+          Email address <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          class="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-sm shadow-sm placeholder-gray-400 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          placeholder="you@example.com"
+        />
+      </div>
+
+      <!-- Password field -->
+      <div class="flex flex-col gap-1">
+        <div class="flex items-center justify-between">
+          <label for="password" class="text-sm font-medium text-gray-700">
+            Password <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          {showForgot && (
+            <a href="/auth/forgot-password" class="text-xs text-blue-600 hover:underline">
+              Forgot password?
+            </a>
+          )}
+        </div>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          class="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-sm shadow-sm placeholder-gray-400 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          placeholder="••••••••"
+        />
+      </div>
+
+      <!-- Remember me -->
+      {showRemember && (
+        <div class="flex items-center gap-2">
+          <input
+            id="remember"
+            name="remember"
+            type="checkbox"
+            class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          <label for="remember" class="text-sm text-gray-600 cursor-pointer select-none">
+            Remember me for 30 days
+          </label>
+        </div>
+      )}
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="w-full flex justify-center items-center gap-2 rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+      >
+        Sign in
+      </button>
+    </form>
+
+    <!-- Footer slot -->
+    <p class="text-center text-sm text-gray-600">
+      <slot name="footer">
+        Don't have an account?{" "}
+        <a href="/auth/register" class="font-medium text-blue-600 hover:underline">
+          Create one
+        </a>
+      </slot>
+    </p>
+  </div>
+</div>

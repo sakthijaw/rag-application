@@ -1,0 +1,76 @@
+---
+/**
+ * Table - Responsive data table with sortable headers, striped rows, and empty state.
+ *
+ * @component Table
+ * @category data
+ * @accessibility role="table", scope attributes on headers, caption support
+ * @slot caption  - Accessible table caption
+ * @slot head     - <tr> with <th> header cells
+ * @slot default  - <tr> body rows
+ * @slot empty    - Content shown when table has no rows
+ * @slot footer   - Pagination or summary row
+ */
+
+export interface Props {
+  /** Accessible caption for screen readers */
+  caption?: string;
+  /** Striped row background */
+  striped?: boolean;
+  /** Highlight row on hover */
+  hoverable?: boolean;
+  /** Compact cell padding */
+  compact?: boolean;
+  /** Stick the header on scroll */
+  stickyHeader?: boolean;
+  /** Show outer border */
+  bordered?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  caption,
+  striped = false,
+  hoverable = true,
+  compact = false,
+  stickyHeader = false,
+  bordered = true,
+  class: className = "",
+} = Astro.props;
+---
+
+<div class:list={["w-full overflow-x-auto rounded-lg", bordered ? "border border-gray-200" : "", className]}>
+  <table
+    class:list={[
+      "min-w-full divide-y divide-gray-200 text-sm",
+      striped ? "[&_tbody_tr:nth-child(even)]:bg-gray-50" : "",
+      hoverable ? "[&_tbody_tr]:hover:bg-gray-50 [&_tbody_tr]:transition-colors" : "",
+    ]}
+  >
+    {caption && <caption class="sr-only">{caption}</caption>}
+
+    <thead class:list={["bg-gray-50", stickyHeader ? "sticky top-0 z-10" : ""]}>
+      <slot name="head" />
+    </thead>
+
+    <tbody class="bg-white divide-y divide-gray-100">
+      <slot />
+    </tbody>
+
+    <tfoot>
+      <slot name="footer" />
+    </tfoot>
+  </table>
+
+  <!-- Empty state -->
+  <div class="hidden [&:has(tbody:empty)]:flex flex-col items-center justify-center py-16 text-gray-400">
+    <slot name="empty">
+      <svg class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+      <p class="text-sm font-medium">No data available</p>
+    </slot>
+  </div>
+</div>

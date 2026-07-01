@@ -1,0 +1,77 @@
+---
+/**
+ * Checkbox - Accessible checkbox input with label and description.
+ *
+ * @component Checkbox
+ * @category forms
+ * @accessibility role="checkbox", aria-checked, keyboard support
+ */
+
+export interface Props {
+  /** Unique id */
+  id: string;
+  /** Label text */
+  label: string;
+  /** Additional description below the label */
+  description?: string;
+  /** Checked state */
+  checked?: boolean;
+  /** Disabled state */
+  disabled?: boolean;
+  /** Error message */
+  error?: string;
+  /** Name for form grouping */
+  name?: string;
+  /** Value submitted with form */
+  value?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  id,
+  label,
+  description,
+  checked = false,
+  disabled = false,
+  error,
+  name,
+  value = "on",
+  class: className = "",
+} = Astro.props;
+---
+
+<div class:list={["flex items-start gap-3", className]}>
+  <div class="flex h-5 items-center">
+    <input
+      id={id}
+      name={name || id}
+      type="checkbox"
+      value={value}
+      checked={checked}
+      disabled={disabled}
+      aria-describedby={description ? `${id}-desc` : undefined}
+      class:list={[
+        "h-4 w-4 rounded border-gray-300 text-blue-600 transition-colors",
+        "focus:ring-2 focus:ring-blue-500 focus:ring-offset-1",
+        disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
+        error ? "border-red-400" : "",
+      ]}
+    />
+  </div>
+  <div class="flex flex-col">
+    <label
+      for={id}
+      class:list={[
+        "text-sm font-medium select-none",
+        disabled ? "text-gray-400 cursor-not-allowed" : "text-gray-700 cursor-pointer",
+      ]}
+    >
+      {label}
+    </label>
+    {description && (
+      <p id={`${id}-desc`} class="text-xs text-gray-500 mt-0.5">{description}</p>
+    )}
+    {error && <p role="alert" class="text-xs text-red-600 mt-0.5">{error}</p>}
+  </div>
+</div>

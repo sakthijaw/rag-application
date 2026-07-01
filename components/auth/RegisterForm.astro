@@ -1,0 +1,128 @@
+---
+/**
+ * RegisterForm - New user registration form with name, email, password, and confirmation.
+ *
+ * @component RegisterForm
+ * @category auth
+ * @accessibility All inputs labelled, password strength hint linked via aria-describedby
+ * @slot oauth  - OAuth sign-up buttons
+ * @slot footer - Login link / terms text
+ */
+
+export interface Props {
+  /** Form action URL */
+  action?: string;
+  /** Page heading */
+  heading?: string;
+  /** Show first + last name fields */
+  showName?: boolean;
+  /** Require password confirmation field */
+  showConfirm?: boolean;
+  /** Show terms and conditions checkbox */
+  showTerms?: boolean;
+  /** Server-side error */
+  error?: string;
+}
+
+const {
+  action = "/auth/register",
+  heading = "Create your account",
+  showName = true,
+  showConfirm = true,
+  showTerms = true,
+  error,
+} = Astro.props;
+---
+
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="w-full max-w-sm space-y-8">
+    <div class="text-center">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900">{heading}</h1>
+    </div>
+
+    <slot name="oauth" />
+
+    {error && (
+      <div role="alert" class="rounded-md bg-red-50 border border-red-200 p-3 text-red-700 text-sm flex items-start gap-2">
+        <svg class="h-4 w-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        {error}
+      </div>
+    )}
+
+    <form action={action} method="post" class="space-y-4" novalidate>
+      {showName && (
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1">
+            <label for="first-name" class="text-sm font-medium text-gray-700">First name</label>
+            <input id="first-name" name="first_name" type="text" autocomplete="given-name" required
+              class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="last-name" class="text-sm font-medium text-gray-700">Last name</label>
+            <input id="last-name" name="last_name" type="text" autocomplete="family-name"
+              class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+          </div>
+        </div>
+      )}
+
+      <div class="flex flex-col gap-1">
+        <label for="reg-email" class="text-sm font-medium text-gray-700">
+          Email address <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input id="reg-email" name="email" type="email" autocomplete="email" required
+          placeholder="you@example.com"
+          class="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="reg-password" class="text-sm font-medium text-gray-700">
+          Password <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input id="reg-password" name="password" type="password" autocomplete="new-password" required
+          placeholder="Min. 8 characters"
+          aria-describedby="password-hint"
+          class="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+        <p id="password-hint" class="text-xs text-gray-500">Use 8+ characters with a mix of letters and numbers.</p>
+      </div>
+
+      {showConfirm && (
+        <div class="flex flex-col gap-1">
+          <label for="confirm-password" class="text-sm font-medium text-gray-700">
+            Confirm password <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <input id="confirm-password" name="password_confirm" type="password" autocomplete="new-password" required
+            placeholder="••••••••"
+            class="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+        </div>
+      )}
+
+      {showTerms && (
+        <div class="flex items-start gap-2">
+          <input id="terms" name="terms" type="checkbox" required
+            class="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+          <label for="terms" class="text-xs text-gray-600 cursor-pointer">
+            I agree to the{" "}
+            <a href="/terms" class="text-blue-600 hover:underline font-medium">Terms of Service</a>
+            {" "}and{" "}
+            <a href="/privacy" class="text-blue-600 hover:underline font-medium">Privacy Policy</a>
+          </label>
+        </div>
+      )}
+
+      <button type="submit"
+        class="w-full flex justify-center rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+        Create account
+      </button>
+    </form>
+
+    <p class="text-center text-sm text-gray-600">
+      <slot name="footer">
+        Already have an account?{" "}
+        <a href="/auth/login" class="font-medium text-blue-600 hover:underline">Sign in</a>
+      </slot>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+---
+/**
+ * Container - Max-width content wrapper with responsive horizontal padding.
+ *
+ * @component Container
+ * @category layout
+ * @slot default - Any page content
+ */
+
+export interface Props {
+  /** Maximum width breakpoint: sm | md | lg | xl | 2xl | full */
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+  /** Horizontal padding size: none | sm | md | lg */
+  padding?: "none" | "sm" | "md" | "lg";
+  /** Center the container horizontally */
+  centered?: boolean;
+  /** HTML element to render as */
+  as?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  maxWidth = "xl",
+  padding = "md",
+  centered = true,
+  as: Tag = "div",
+  class: className = "",
+} = Astro.props;
+
+const widthMap = {
+  sm: "max-w-screen-sm",
+  md: "max-w-screen-md",
+  lg: "max-w-screen-lg",
+  xl: "max-w-screen-xl",
+  "2xl": "max-w-screen-2xl",
+  full: "max-w-full",
+};
+
+const paddingMap = {
+  none: "",
+  sm: "px-3 sm:px-4",
+  md: "px-4 sm:px-6 lg:px-8",
+  lg: "px-6 sm:px-8 lg:px-12",
+};
+---
+
+<Tag
+  class:list={[
+    widthMap[maxWidth],
+    paddingMap[padding],
+    centered ? "mx-auto" : "",
+    "w-full",
+    className,
+  ]}
+>
+  <slot />
+</Tag>
