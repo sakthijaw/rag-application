@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+
+# Environment — never commit secrets
+.env
+*.env
+!.env.example
+
+# Large ML model cache — downloaded at startup, not committed
+data/models/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
