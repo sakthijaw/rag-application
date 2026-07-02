@@ -8,20 +8,21 @@ __pycache__/
 venv/
 *.egg-info/
 .eggs/
-dist/
 build/
 .pytest_cache/
 
-# Environment — never commit secrets
+# Environment
 .env
 *.env
 !.env.example
 
-# Large ML model cache — downloaded at startup, not committed
+# ML model cache
 data/models/
 
 # Frontend
+node_modules/
 frontend/node_modules/
+dist/
 frontend/dist/
 frontend/.env.local
 frontend/.env.production
