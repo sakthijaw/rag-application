@@ -5,10 +5,10 @@ import { Sun, Moon, Menu, X, Github, ArrowRight } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
 
 const NAV_LINKS = [
-  { label: 'Components', href: '/#components' },
-  { label: 'AI Suite',   href: '/#ai-suite'   },
-  { label: 'RAG Demo',  href: '/rag-demo'     },
-  { label: 'Docs',      href: '/#docs'        },
+  { label: 'Components', href: '/components' },
+  { label: 'AI Suite',   href: '/ai-suite'   },
+  { label: 'RAG Demo',  href: '/demo'        },
+  { label: 'Docs',      href: '/docs'        },
 ]
 
 export function Navbar() {
@@ -70,7 +70,7 @@ export function Navbar() {
               <NavItem
                 key={link.label}
                 href={link.href}
-                active={pathname === link.href || (link.href === '/rag-demo' && pathname === '/rag-demo')}
+                active={pathname === link.href || pathname.startsWith(link.href + '/')}
               >
                 {link.label}
               </NavItem>
@@ -96,7 +96,7 @@ export function Navbar() {
             <ThemeToggle isDark={isDark} onToggle={toggle} />
 
             {/* CTA */}
-            <Link to="/rag-demo" className="btn-solid text-sm py-2 px-4">
+            <Link to="/demo" className="btn-solid text-sm py-2 px-4">
               Get started
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -169,7 +169,7 @@ export function Navbar() {
             </nav>
 
             <div className="px-6 mt-8">
-              <Link to="/rag-demo" className="btn-solid w-full justify-center text-base py-3.5">
+              <Link to="/demo" className="btn-solid w-full justify-center text-base py-3.5">
                 Get started
                 <ArrowRight className="h-4 w-4" />
               </Link>

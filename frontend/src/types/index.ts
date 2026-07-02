@@ -88,3 +88,36 @@ export const SUGGESTED_PROMPTS: SuggestedPrompt[] = [
   { icon: '🔔', label: 'Notifications',         query: 'Toast notifications for success and errors' },
   { icon: '👤', label: 'Profile card',          query: 'User profile card with bio and avatar' },
 ]
+
+// ── Component library types ──────────────────────────────────
+
+export interface ComponentListItem {
+  name: string
+  category: string
+  description: string
+  tags: string[]
+  import_path: string
+  props_count: number
+  has_slots: boolean
+}
+
+export interface ComponentListResponse {
+  total: number
+  components: ComponentListItem[]
+}
+
+export interface ComponentDetail {
+  name: string
+  category: string
+  description: string
+  import_path: string
+  file_path: string
+  props: Prop[]
+  slots: Slot[]
+  tags: string[]
+  accessibility_notes: string
+  usage_example: string
+  dependencies: string[]
+  events: string[]
+}
+

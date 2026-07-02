@@ -308,7 +308,7 @@ export function Hero() {
         <FadeUp delay={STAGGER[3]} reduced={reduced}>
           <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
             <Link
-              to="/#components"
+              to="/components"
               className="btn-solid"
             >
               Explore components

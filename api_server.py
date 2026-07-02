@@ -13,6 +13,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import json
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -35,6 +36,14 @@ _retriever.load()
 
 _gen_cfg = load_generator_config(_settings)
 _generator = Generator(_gen_cfg)
+
+# ── Load component metadata for /api/components endpoints ─────
+_metadata_path = _root / "data" / "metadata.json"
+_component_metadata: list[dict] = []
+if _metadata_path.exists():
+    with open(_metadata_path, "r", encoding="utf-8") as f:
+        _meta_json = json.load(f)
+        _component_metadata = _meta_json.get("components", [])
 
 # ── App ───────────────────────────────────────────────────────
 app = FastAPI(title="Astro Component RAG API", version="1.0.0")
@@ -115,6 +124,49 @@ def search(req: SearchRequest) -> dict:
         "tags": (chosen.tags[:12] if chosen else []),
         "accessibility_notes": (chosen.accessibility_notes if chosen else ""),
         "alternatives": alternatives,
+    }
+
+
+@app.get("/api/components")
+def list_components() -> dict:
+    """Return all indexed components with summary info."""
+    items = []
+    for comp in _component_metadata:
+        items.append({
+            "name": comp["component_name"],
+            "category": comp.get("category", ""),
+            "description": comp.get("description", ""),
+            "tags": comp.get("tags", [])[:8],
+            "import_path": comp.get("import_path", ""),
+            "props_count": len(comp.get("props", [])),
+            "has_slots": bool(comp.get("slots")),
+        })
+    return {"total": len(items), "components": items}
+
+
+@app.get("/api/components/{name}")
+def get_component(name: str) -> dict:
+    """Return full metadata for a single component."""
+    comp = next(
+        (c for c in _component_metadata if c["component_name"].lower() == name.lower()),
+        None,
+    )
+    if not comp:
+        raise HTTPException(status_code=404, detail=f"Component '{name}' not found.")
+
+    return {
+        "name": comp["component_name"],
+        "category": comp.get("category", ""),
+        "description": comp.get("description", ""),
+        "import_path": comp.get("import_path", ""),
+        "file_path": comp.get("file_path", ""),
+        "props": comp.get("props", []),
+        "slots": comp.get("slots", []),
+        "tags": comp.get("tags", []),
+        "accessibility_notes": comp.get("accessibility_notes", ""),
+        "usage_example": comp.get("usage_example", ""),
+        "dependencies": comp.get("dependencies", []),
+        "events": comp.get("events", []),
     }
 
 
